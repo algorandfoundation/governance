@@ -1,0 +1,20 @@
+#pragma version 4
+// This LogicSig approves every application call transaction,
+// as long as it does not rekey and doesn not pay any fees
+intcblock 6
+
+// Check that this is an application call
+txn TypeEnum
+intc_0 // 6 = application-call-type
+==
+assert
+
+// Check that it does not rekey
+txn RekeyTo
+global ZeroAddress
+==
+assert
+
+// Check that the fee is zero
+txn Fee
+!
