@@ -1,6 +1,6 @@
 # Formal spec of the Algorand governance state machine:
 
-Each governance address has its own state machine for each period. These machines are completely independent and the state transition in one has no bearing on any other. The only cross-address influence are the vote tally and the amount of awards received at the end, these aspects are left out-of-scope of this spec.
+Each governance address has its own state machine for each period. These machines are completely independent and the state transition in one has no bearing on any other. The only cross-address influence are the vote tally and the amount of rewards received at the end, these aspects are left out-of-scope of this spec.
 
 This spec consists of two layers: a decoding layer that reads the blockchain and provides input to the state machine, and the state machine itself. We describe the state machine first, and then the decoder.
 
@@ -59,7 +59,7 @@ The decoding layer (for a particular governance period and governing address) fo
 
 The decoder is parametrized by a governance address GA that it tracks, the governance escrow address EA, and by five timestamps: `signup-open < signup-close <= voting-open < voting-close <= period-end`. (Note: having more voting sessions in a period is possible, but will complicate the description of this layer.)
 
-For every block, the decoder process in order all the transactions in this block with Sender==GA, as well as the timestamp of this block (`cts`) and the the timestamp of the previous block (`pts`), as describe below. It goes over all the bullets below in order, and if more than one of them applies then it sends more than one input to the state machine.
+For every block, the decoder processes all the transactions in this block with Sender==GA in order, as well as the timestamp of this block (`cts`) and the the timestamp of the previous block (`pts`), as described below. It goes over all the bullets below in order, and if more than one of them applies then it sends more than one input to the state machine.
 
 + If `pts < signup-open <= cts` then send `Signup-open` before processing any of the transactions in the block;
 
@@ -71,10 +71,30 @@ For every block, the decoder process in order all the transactions in this block
 
 + If `pts <= period-end < cts` then send `Period-end` before processing any of the transactions in the block;
 
-+ For every pay transaction from GA to EA in this block with notes field of the format `af/gov1:j{"com":<n>}` if <n> is a 53-bit non-negative integer then it sends `Commitment(<n>)`. In more detail, the part enclosed in `{}` (including) must be valid JSON object literal that includes a key "com" with a number value. (It may include other key/value pairs, they will be ignored.)
++ For every pay transaction from GA to EA in this block with notes field of the format `af/gov1:j{"com":<n>}` if <n> is a 53-bit non-negative integer then it sends `Commitment(<n>)`. In more detail, the part enclosed in `{}` (including) must be valid JSON object literal that includes a key "com" with a number value. It may include other key/value pairs, they will be ignored in this spec.
 
-+ For every pay transaction from GA to EA in this block with notes field of the format `af/gov1:j[3,"a"]` or `af/gov1:j[3,"b"]` it sends `Vote-cast`.
+  *Modified Dec 2021*: Starting the 2nd period. governors will also be able to specify benificiary address, using the format `af/gov1:j{"com":nnn,"bnf":"aaa"}` where `aaa` is a valid Algorand address. This format specifies that governance rewards must be sent to the address `aaa` rather than to the governor's address. Since distribution of rewards is out-of-scope for this standard, this addition is ignored here.
 
-  In more detail, the part enclosed in `[]` (including) must be a valid JSON array literal, whose length is one more than the number of measures in the voting session (length=2 for the voting session in the 1st governance period). Denoting that array by A, A[0] must be a number literal, equal to the internal index of the voting session (which is 3 for the voting session in the 1st governance period). Each A[i] for i>0 must be a string literal equal to one of the options for the i'th measure (so A[1] must be either "a" or "b" for the voting session in the first governance period).
++ For every pay transaction from GA to EA in this block with notes field of the format `af/gov1:j[idx,q1,q2,...]` it sends `Vote-cast`.
+
+  (*Modified Dec 2021*) In more detail, the part enclosed in `[]` (including) must be a valid JSON array literal, whose length is one more than the number of measures in the voting session (so for example length=2 for the voting session in the 1st governance period that had only one measure). Denoting that array by A, A[0] must be a number literal, equal to the internal index of the voting session (which is 3 for the voting session in the 1st governance period and 4 for the voting session in the second governance period).
+  Each A[i] for i>0 correspond to a vote for one of the measure in the voting session, and can be one of the following formats:
+ 
+  - a string literal equal to one of the options for the i'th measure (so A[1] must be either "a" or "b" for the voting session in the first governance period).
+  
+  - a JSON object literal of the format `{"o1":n1,"o2":n2}` where `"o1","o2",...` are string literals corresponding to the options for the i'th measure and `n1,n2,...` are integers that must add up to the commitment amount for that governor (in microAlgos). This format indicates proportional voting, this governor address votes `n1` microAlgos for option `o1`, `n2` microAlgos for options `o2`, etc.
+  
+  *Some examples*: If the voting session has two measures, the 1st with two options "a","b" and the second with three options "a","b","c", then the following will all be valid voting notes for a governors that committed 1000 microAlgos:
+
+  - `af/gov1:j[4,"a","c"]` (voting 1000 uAlgo for option "a" in 1st measure and "c" in the 2nd)
+  - `af/gov1:j[4,{"a":1000},"c"]` (a more complicated format that means the same as above)
+  - `af/gov1:j[4,{"a":100,"b":900},"c"]` (split 1st measure: 100 for "a" and 900 for "b", still vote 1000 for "c" in 2nd measure)
+  - `af/gov1:j[4,{"a":100,"b":900},{"a":800,"c":200}]` (split 1st measure100 "a" and 900 "b", and 2nd measure: 800 "a" and 200 "b")
+
+  The following, however, are NOT valid:
+
+  - `af/gov1:j[4,"a"]` (must register some vote for the 2nd measure)
+  - `af/gov1:j[4,{"a":100,"b":800},"c"]` (sum of weights for 1st measure is less than 1000)
+  - `af/gov1:j[4,{"a":100,"b":900},{"a":800,"c":300}]` (sum of weights for 2nd measure is more than 1000)
 
 + If the block contains any transaction with Sender==GA, the decoder looks up the balance of GA at the end of the block and sends `Balance-change(<end-of-block-balance>)`.
