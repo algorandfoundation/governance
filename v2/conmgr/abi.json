@@ -1,0 +1,64 @@
+{
+  "name": "consensus",
+  "networks": {},
+  "methods": [
+    {
+      "name": "Admin_init",
+      "args": [],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "User_register",
+      "args": [
+        {
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "User_keyreg",
+      "args": [
+        {
+          "type": "address"
+        },
+        {
+          "type": "address"
+        },
+        {
+          "type": "byte[64]"
+        },
+        {
+          "type": "uint64"
+        },
+        {
+          "type": "uint64"
+        },
+        {
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "User_unregister",
+      "args": [],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "Admin_delete",
+      "args": [],
+      "returns": {
+        "type": "void"
+      }
+    }
+  ]
+}

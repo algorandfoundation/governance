@@ -1,0 +1,78 @@
+{
+  "name": "afgov-voting-app",
+  "desc": "Interface for Algorand's governance voting. The application supports bare optIn, create and delete (from the creator), and clearState transactions. The latter executes the same logic as Staking_withdraw with respect to rescinding the vote.",
+  "methods": [
+    {
+      "name": "Creator_config",
+      "desc": "Configure the voting app with the address of the staking application and a timestamp when the app can be deleted. Can only be called once.",
+      "args": [
+        { "type": "address", "name": "stakingAddress", "desc": "The address of the staking application." },
+        { "type": "uint64", "name": "stakingAppId", "desc": "The ID of the staking application." },
+        { "type": "uint64", "name": "deleteAfter", "desc": "UNIX timestamp when the application can be deleted" }
+      ],
+      "returns": { "type": "void" }
+    },
+    {
+      "name": "Creator_setVotingSession",
+      "desc": "Set up a new voting session, can only be called by the creator. Can only be called once.",
+      "args":[
+        { "type": "uint64", "name": "voting_start", "desc": "UNIX timestamp when voting begins." },
+        { "type": "uint64", "name": "voting_end", "desc": "UNIX timestamp when voting closes." },
+        { "type": "uint64", "name": "voting_finalized", "desc": "UNIX timestamp when voting results are finalized." },
+        { "type": "uint64", "name": "num_measures", "desc": "The number of measures. Must be between [1,4]." },
+        { "type": "uint64[4]", "name": "choices_per_measure", "desc": "A vote can have up to four measures and each measure up to four choices. The choices_per_measure parameter denotes for each measure the number of available choices. E.g., the value [2,3,0,0] configures two measures, first with two choices, second with three choices." }
+      ],
+      "returns": { "type": "void" }
+    },
+    {
+      "name": "Staking_vote",
+      "desc": "Submit a vote. Fails if the governor has voted but not yet withdrawn the vote. Can only be called by the staking application.",
+      "args": [
+        { "type": "account", "name": "governor", "desc": "The governor's account that votes." },
+        { "type": "uint64", "name": "stake", "desc": "The governor's stake in microAlgos." },
+        { "type": "uint64[4][4]", "name": "vote", "desc": "The governor's vote. A vote consists of four measures and each measure can have up to four options to choose from." }
+      ],
+      "returns": { "type": "uint64[4][4]", "desc": "The current tally." }
+    },
+    {
+      "name": "Staking_withdraw",
+      "desc": "Withdraw a vote (i.e., unvote) if the voting session is not yet finalized. Can only be called by the staking application.",
+      "args": [
+        { "type": "account", "name": "governor", "desc": "The governor's account to withdraw." }
+      ],
+      "returns": { "type": "uint64[4][4]", "desc": "The current tally." }
+    },
+    {
+      "name": "Staking_checkVoted",
+      "desc": "Succeeds if a governor has an active vote in the tally, fails otherwise. Can only be called by the staking application to determine rewards eligibility.",
+      "args": [
+        { "type": "account", "name": "governor", "desc": "The governor's account." }
+      ],
+      "returns": { "type": "void" }
+    },
+    {
+      "name": "getVotingSession",
+      "desc": "Get the configuration details of this vote.",
+      "args": [ ],
+      "returns": { "type": "(uint64,uint64,uint64,uint64,uint64[4])", "desc": "The tuple (voting_start, voting_end, voting_finalized, num_measures, choices_per_measure)." }
+    },
+    {
+      "name": "getTally",
+      "desc": "Get the results of this vote. This is the running tally before voting_finalized, and the final result after voting_finalized.",
+      "args": [ ],
+      "returns": { "type": "uint64[4][4]", "desc": "The accumulated results for each measure and option." }
+    },
+    {
+      "name": "getNumTallied",
+      "desc": "Get the number of governors that have voted. This number does not include governors that have removed their vote.",
+      "args": [ ],
+      "returns": { "type": "uint64", "desc": "The number of governors that have voted." }
+    },
+    {
+      "name": "getNumUntallied",
+      "desc": "Get the number of governors that have voted but later removed their vote.",
+      "args": [ ],
+      "returns": { "type": "uint64", "desc": "The number of governors that have removed their vote." }
+    }
+  ]
+}

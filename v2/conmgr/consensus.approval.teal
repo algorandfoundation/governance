@@ -1,0 +1,312 @@
+#pragma version 6
+
+// State
+// Global: 0 byte, 3 uint
+// Local : 1 byte, 1 uint
+
+// First, we get allocated
+txn ApplicationID
+bz done
+// Then, we get initialized
+txna ApplicationArgs 0
+byte 0x38055ba5
+==
+bnz Admin_init
+// Next, users either register
+txna ApplicationArgs 0
+byte 0xd3c4d2fb
+==
+bnz User_register
+// Or they generate a key
+txna ApplicationArgs 0
+byte 0xc8362cbd
+==
+bnz User_keyreg
+// Or they unregister a key
+txna ApplicationArgs 0
+byte 0x60268df4
+==
+bnz User_keyunreg
+// Or they unregister
+txna ApplicationArgs 0
+byte 0x108e1963
+==
+bnz User_unregister
+// Finally, we get deleted
+txna ApplicationArgs 0
+byte 0xe8614d9c
+==
+bnz Admin_delete
+err
+
+loadState:
+byte 0x00
+app_global_get
+store 0
+byte 0x01
+app_global_get
+store 1
+byte 0x02
+app_global_get
+store 2
+retsub
+
+saveState:
+byte 0x00
+load 0
+app_global_put
+byte 0x01
+load 1
+app_global_put
+byte 0x02
+load 2
+app_global_put
+retsub
+
+mustBeCreator:
+txn Sender
+global CreatorAddress
+==
+assert
+retsub
+
+checkOC:
+txn OnCompletion
+==
+assert
+retsub
+
+Admin_init:
+int NoOp
+callsub checkOC
+callsub mustBeCreator
+callsub loadState
+load 0
+int 0
+==
+assert
+int 1
+store 0
+txna Assets 0
+store 1
+itxn_begin
+  // OptIn to pALGO
+  int 0
+  itxn_field Fee
+  int 0
+  itxn_field AssetAmount
+  int axfer
+  itxn_field TypeEnum
+  global CurrentApplicationAddress
+  itxn_field AssetReceiver
+  load 1
+  itxn_field XferAsset
+itxn_submit
+callsub saveState
+b done
+
+storeUserAccount:
+txn Sender
+byte 0x03
+load 3
+app_local_put
+txn Sender
+byte 0x04
+load 4
+app_local_put
+retsub
+
+loadUserAccount:
+txna Accounts 1
+store 5
+load 5
+byte 0x03
+app_local_get
+store 3
+load 5
+byte 0x04
+app_local_get
+store 4
+txn Sender
+load 3
+==
+assert
+retsub
+
+User_register:
+int OptIn
+callsub checkOC
+callsub loadState
+load 0
+int 1
+==
+assert
+// Expect an account to be rekeyed to us
+gtxn 0 RekeyTo
+global CurrentApplicationAddress
+==
+assert
+// Save that account in the user's local
+txna Accounts 1
+store 3
+txna ApplicationArgs 1
+btoi
+dup
+store 4
+txn Sender
+balance
+<=
+assert
+callsub storeUserAccount
+// Pay out however many pALGOs the account has to the sender
+itxn_begin
+  int 0
+  itxn_field Fee
+  load 4
+  itxn_field AssetAmount
+  int axfer
+  itxn_field TypeEnum
+  load 3
+  itxn_field AssetReceiver
+  load 1
+  itxn_field XferAsset
+itxn_submit
+// Increment the number of users
+load 2
+int 1
++
+store 2
+callsub saveState
+b done
+
+User_keyreg:
+int NoOp
+callsub checkOC
+callsub loadUserAccount
+itxn_begin
+  int 0
+  itxn_field Fee
+  int keyreg
+  itxn_field TypeEnum
+  load 5
+  itxn_field Sender
+  txna ApplicationArgs 1
+  itxn_field VotePK
+  txna ApplicationArgs 2
+  itxn_field SelectionPK
+  txna ApplicationArgs 3
+  itxn_field StateProofPK
+  txna ApplicationArgs 4
+  btoi
+  itxn_field VoteFirst
+  txna ApplicationArgs 5
+  btoi
+  itxn_field VoteLast
+  txna ApplicationArgs 6
+  btoi
+  itxn_field VoteKeyDilution
+itxn_submit
+b done
+
+User_keyunreg:
+int NoOp
+callsub checkOC
+callsub loadUserAccount
+itxn_begin
+  int 0
+  itxn_field Fee
+  int keyreg
+  itxn_field TypeEnum
+  load 5
+  itxn_field Sender
+itxn_submit
+b done
+
+User_unregister:
+int NoOp
+callsub checkOC
+callsub loadState
+callsub loadUserAccount
+// Expect to be paid back the user's balance
+gtxn 0 TypeEnum
+int axfer
+==
+assert
+load 1
+gtxn 0 XferAsset
+==
+assert
+gtxn 0 AssetAmount
+load 4
+==
+assert
+gtxn 0 AssetReceiver
+global CurrentApplicationAddress
+==
+assert
+// Rekey the account back
+itxn_begin
+  int 0
+  itxn_field Fee
+  int 0
+  itxn_field Amount
+  int pay
+  itxn_field TypeEnum
+  load 5
+  itxn_field Sender
+  txn Sender
+  itxn_field Receiver
+  txn Sender
+  itxn_field RekeyTo
+itxn_submit
+// Decrement the number of users
+load 2
+int 1
+-
+store 2
+callsub saveState
+b done
+
+Admin_delete:
+int DeleteApplication
+callsub checkOC
+callsub mustBeCreator
+callsub loadState
+load 2
+bnz fail
+itxn_begin
+  // And our pALGO
+  int 0
+  itxn_field Fee
+  int 0
+  itxn_field AssetAmount
+  int axfer
+  itxn_field TypeEnum
+  txn Sender
+  itxn_field AssetCloseTo
+  txn Sender
+  itxn_field AssetReceiver
+  load 1
+  itxn_field XferAsset
+itxn_next
+  // Close out our ALGOs
+  int 0
+  itxn_field Fee
+  int 0
+  itxn_field Amount
+  int pay
+  itxn_field TypeEnum
+  txn Sender
+  itxn_field CloseRemainderTo
+  txn Sender
+  itxn_field Receiver
+itxn_submit
+b done
+
+// Comment this in to show the warnings
+// byte x
+
+fail:
+err
+done:
+int 1

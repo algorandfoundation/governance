@@ -1,0 +1,91 @@
+{
+  "name": "algo-govt",
+  "networks": {},
+  "methods": [
+    {
+      "name": "Admin_delete",
+      "args": [],
+      "returns": {
+        "type": "(uint64,uint64)"
+      }
+    },
+    {
+      "name": "Admin_nop",
+      "args": [],
+      "returns": {
+        "type": "uint64"
+      }
+    },
+    {
+      "name": "Governor_stake",
+      "args": [
+        {
+          "type": "uint64"
+        },
+        {
+          "type": "uint64"
+        },
+        {
+          "type": "address"
+        }
+      ],
+      "returns": {
+        "type": "byte"
+      }
+    },
+    {
+      "name": "Governor_unstake",
+      "args": [],
+      "returns": {
+        "type": "uint64"
+      }
+    },
+    {
+      "name": "Governor_unvote",
+      "args": [],
+      "returns": {
+        "type": "uint64[4][4]"
+      }
+    },
+    {
+      "name": "Governor_vote",
+      "args": [
+        {
+          "type": "uint64[4][4]"
+        }
+      ],
+      "returns": {
+        "type": "uint64[4][4]"
+      }
+    },
+    {
+      "name": "Info",
+      "args": [],
+      "returns": {
+        "type": "((uint64,uint64,address,uint64,address,uint64,uint64[4],uint64,uint64,uint64,uint64,uint64,uint64,uint64),uint64,uint64[4][4],uint64,uint64,uint64,uint64,uint64,uint64,uint64)"
+      }
+    },
+    {
+      "name": "Other_claimFor",
+      "args": [
+        {
+          "type": "address"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      }
+    },
+    {
+      "name": "accountData",
+      "args": [
+        {
+          "type": "address"
+        }
+      ],
+      "returns": {
+        "type": "(address,uint64,uint64,uint64,byte)"
+      }
+    }
+  ]
+}

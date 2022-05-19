@@ -1,0 +1,754 @@
+#pragma version 6
+callsub assertsafteychecks_0
+txn ApplicationID
+int 0
+==
+bnz main_l34
+txn OnCompletion
+int OptIn
+==
+bnz main_l31
+txn OnCompletion
+int CloseOut
+==
+bnz main_l30
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l29
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l26
+txn OnCompletion
+int NoOp
+==
+bnz main_l7
+err
+main_l7:
+txn NumAppArgs
+int 0
+>
+assert
+txna ApplicationArgs 0
+byte 0x899aa2d5
+==
+bnz main_l25
+txna ApplicationArgs 0
+byte 0x70223cca
+==
+bnz main_l24
+txna ApplicationArgs 0
+byte 0x48794b46
+==
+bnz main_l23
+txna ApplicationArgs 0
+byte 0x87919831
+==
+bnz main_l22
+txna ApplicationArgs 0
+byte 0x398eebaa
+==
+bnz main_l21
+txna ApplicationArgs 0
+byte 0x1544a462
+==
+bnz main_l20
+txna ApplicationArgs 0
+byte 0x9bb545d5
+==
+bnz main_l19
+txna ApplicationArgs 0
+byte 0x3f1696f2
+==
+bnz main_l18
+txna ApplicationArgs 0
+byte 0x457821a0
+==
+bnz main_l17
+err
+main_l17:
+byte 0x151F7C75
+callsub getnumuntallied_5
+itob
+concat
+log
+int 1
+return
+main_l18:
+byte 0x151F7C75
+callsub getnumtallied_4
+itob
+concat
+log
+int 1
+return
+main_l19:
+byte 0x151F7C75
+callsub gettally_3
+concat
+log
+int 1
+return
+main_l20:
+byte 0x151F7C75
+callsub getvotingsession_6
+concat
+log
+int 1
+return
+main_l21:
+txn NumAppArgs
+int 2
+==
+assert
+byte 0x151F7C75
+txna ApplicationArgs 1
+btoi
+callsub stakingwithdraw_13
+concat
+log
+int 1
+return
+main_l22:
+txn NumAppArgs
+int 2
+==
+assert
+txna ApplicationArgs 1
+btoi
+callsub stakingcheckvoted_11
+int 1
+return
+main_l23:
+txn NumAppArgs
+int 4
+==
+assert
+byte 0x151F7C75
+txna ApplicationArgs 1
+btoi
+txna ApplicationArgs 2
+btoi
+txna ApplicationArgs 3
+callsub stakingvote_12
+concat
+log
+int 1
+return
+main_l24:
+txn NumAppArgs
+int 6
+==
+assert
+txna ApplicationArgs 1
+btoi
+txna ApplicationArgs 2
+btoi
+txna ApplicationArgs 3
+btoi
+txna ApplicationArgs 4
+btoi
+txna ApplicationArgs 5
+callsub creatorsetvotingsession_9
+int 1
+return
+main_l25:
+txn NumAppArgs
+int 4
+==
+assert
+txna ApplicationArgs 1
+txna ApplicationArgs 2
+btoi
+txna ApplicationArgs 3
+btoi
+callsub creatorconfig_8
+int 1
+return
+main_l26:
+txn Sender
+global CreatorAddress
+==
+assert
+int 1
+assert
+txna Applications 0
+byte "delete_after"
+app_global_get_ex
+store 3
+store 2
+load 3
+!
+bnz main_l28
+global LatestTimestamp
+load 2
+>
+assert
+int 1
+return
+main_l28:
+int 1
+return
+main_l29:
+int 0
+return
+main_l30:
+int 1
+return
+main_l31:
+txna Applications 0
+byte "voting_start"
+app_global_get_ex
+store 1
+store 0
+load 1
+!
+bnz main_l33
+global LatestTimestamp
+load 0
+<
+return
+main_l33:
+int 1
+return
+main_l34:
+byte ""
+byte 0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+app_global_put
+byte "num_tallied"
+int 0
+app_global_put
+byte "num_untallied"
+int 0
+app_global_put
+int 1
+return
+
+// assert_saftey_checks
+assertsafteychecks_0:
+txn Fee
+global MinTxnFee
+<=
+assert
+txn RekeyTo
+global ZeroAddress
+==
+assert
+txn CloseRemainderTo
+global ZeroAddress
+==
+assert
+txn AssetCloseTo
+global ZeroAddress
+==
+assert
+retsub
+
+// assert_staking_id_set
+assertstakingidset_1:
+txna Applications 0
+byte "staking_app_address"
+app_global_get_ex
+store 23
+store 22
+load 23
+assert
+retsub
+
+// assert_voting_session_set
+assertvotingsessionset_2:
+txna Applications 0
+byte "choices_per_measure"
+app_global_get_ex
+store 5
+store 4
+load 5
+assert
+retsub
+
+// get_tally
+gettally_3:
+byte ""
+app_global_get
+retsub
+
+// get_num_tallied
+getnumtallied_4:
+byte "num_tallied"
+app_global_get
+retsub
+
+// get_num_untallied
+getnumuntallied_5:
+byte "num_untallied"
+app_global_get
+retsub
+
+// get_voting_session
+getvotingsession_6:
+callsub assertvotingsessionset_2
+byte "voting_start"
+app_global_get
+itob
+byte "voting_end"
+app_global_get
+itob
+concat
+byte "voting_finalized"
+app_global_get
+itob
+concat
+byte "num_measures"
+app_global_get
+itob
+concat
+byte "choices_per_measure"
+app_global_get
+concat
+retsub
+
+// validate_governor
+validategovernor_7:
+store 25
+load 25
+int 1
+>=
+assert
+load 25
+txn NumAccounts
+<=
+assert
+load 25
+global CurrentApplicationID
+app_opted_in
+assert
+retsub
+
+// creator_config
+creatorconfig_8:
+store 8
+store 7
+store 6
+txn Sender
+global CreatorAddress
+==
+assert
+txna Applications 0
+byte "staking_app_address"
+app_global_get_ex
+store 10
+store 9
+load 10
+!
+assert
+load 6
+byte "appID"
+load 7
+itob
+concat
+sha512_256
+==
+assert
+load 8
+global LatestTimestamp
+>
+assert
+byte "staking_app_address"
+load 6
+app_global_put
+byte "delete_after"
+load 8
+app_global_put
+retsub
+
+// creator_set_voting_session
+creatorsetvotingsession_9:
+store 15
+store 14
+store 13
+store 12
+store 11
+txn Sender
+global CreatorAddress
+==
+assert
+callsub assertstakingidset_1
+txna Applications 0
+byte "choices_per_measure"
+app_global_get_ex
+store 21
+store 20
+load 21
+!
+assert
+txna Applications 0
+byte "delete_after"
+app_global_get_ex
+store 19
+store 18
+global LatestTimestamp
+load 11
+<
+assert
+load 11
+load 12
+<
+assert
+load 12
+load 13
+<=
+assert
+load 13
+load 18
+<
+assert
+load 14
+int 1
+>=
+assert
+load 14
+int 4
+<=
+assert
+load 15
+len
+int 32
+==
+assert
+int 0
+store 16
+creatorsetvotingsession_9_l1:
+load 16
+load 14
+<
+bnz creatorsetvotingsession_9_l5
+load 14
+store 16
+creatorsetvotingsession_9_l3:
+load 16
+int 4
+<
+bz creatorsetvotingsession_9_l6
+load 16
+int 8
+*
+store 17
+load 15
+load 17
+extract_uint64
+int 0
+==
+assert
+load 16
+int 1
++
+store 16
+b creatorsetvotingsession_9_l3
+creatorsetvotingsession_9_l5:
+load 16
+int 8
+*
+store 17
+load 15
+load 17
+extract_uint64
+int 2
+>=
+assert
+load 15
+load 17
+extract_uint64
+int 4
+<=
+assert
+load 16
+int 1
++
+store 16
+b creatorsetvotingsession_9_l1
+creatorsetvotingsession_9_l6:
+byte "voting_start"
+load 11
+app_global_put
+byte "voting_end"
+load 12
+app_global_put
+byte "voting_finalized"
+load 13
+app_global_put
+byte "num_measures"
+load 14
+app_global_put
+byte "choices_per_measure"
+load 15
+app_global_put
+retsub
+
+// staking_has_voted
+stakinghasvoted_10:
+store 26
+load 26
+global CurrentApplicationID
+byte ""
+app_local_get_ex
+store 28
+store 27
+load 28
+retsub
+
+// staking_check_voted
+stakingcheckvoted_11:
+store 24
+txn Sender
+byte "staking_app_address"
+app_global_get
+==
+assert
+load 24
+callsub validategovernor_7
+load 24
+callsub stakinghasvoted_10
+assert
+retsub
+
+// staking_vote
+stakingvote_12:
+store 31
+store 30
+store 29
+callsub assertvotingsessionset_2
+txn Sender
+byte "staking_app_address"
+app_global_get
+==
+assert
+global LatestTimestamp
+byte "voting_start"
+app_global_get
+>=
+assert
+global LatestTimestamp
+byte "voting_end"
+app_global_get
+<=
+assert
+load 29
+callsub validategovernor_7
+load 29
+callsub stakinghasvoted_10
+bnz stakingvote_12_l10
+load 31
+len
+int 128
+==
+assert
+int 0
+store 32
+stakingvote_12_l2:
+load 32
+byte "num_measures"
+app_global_get
+<
+bnz stakingvote_12_l6
+byte "num_measures"
+app_global_get
+int 32
+*
+store 34
+stakingvote_12_l4:
+load 34
+int 128
+<
+bz stakingvote_12_l11
+load 31
+load 34
+extract_uint64
+int 0
+==
+assert
+load 34
+int 8
++
+store 34
+b stakingvote_12_l4
+stakingvote_12_l6:
+load 32
+int 32
+*
+store 34
+load 30
+load 31
+load 34
+int 0
++
+extract_uint64
+load 31
+load 34
+int 8
++
+extract_uint64
++
+load 31
+load 34
+int 16
++
+extract_uint64
++
+load 31
+load 34
+int 24
++
+extract_uint64
++
+==
+assert
+byte "choices_per_measure"
+app_global_get
+load 32
+int 8
+*
+extract_uint64
+store 35
+load 35
+store 33
+stakingvote_12_l7:
+load 33
+int 4
+<
+bnz stakingvote_12_l9
+load 32
+int 1
++
+store 32
+b stakingvote_12_l2
+stakingvote_12_l9:
+load 32
+int 32
+*
+load 33
+int 8
+*
++
+store 34
+load 31
+load 34
+extract_uint64
+int 0
+==
+assert
+load 33
+int 1
++
+store 33
+b stakingvote_12_l7
+stakingvote_12_l10:
+int 0
+return
+stakingvote_12_l11:
+load 29
+byte ""
+load 31
+app_local_put
+load 31
+extract 0 64
+store 36
+load 31
+extract 64 64
+store 37
+byte ""
+app_global_get
+extract 0 64
+store 38
+byte ""
+app_global_get
+extract 64 64
+store 39
+byte ""
+byte 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+load 38
+load 36
+b+
+b|
+byte 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+load 39
+load 37
+b+
+b|
+concat
+app_global_put
+byte "num_tallied"
+byte "num_tallied"
+app_global_get
+int 1
++
+app_global_put
+callsub gettally_3
+retsub
+
+// staking_withdraw
+stakingwithdraw_13:
+store 40
+txn Sender
+byte "staking_app_address"
+app_global_get
+==
+assert
+callsub assertvotingsessionset_2
+load 40
+callsub validategovernor_7
+load 40
+callsub stakingcheckvoted_11
+global LatestTimestamp
+byte "voting_finalized"
+app_global_get
+<
+assert
+load 40
+byte ""
+app_local_get
+extract 0 64
+store 41
+load 40
+byte ""
+app_local_get
+extract 64 64
+store 42
+byte ""
+app_global_get
+extract 0 64
+store 43
+byte ""
+app_global_get
+extract 64 64
+store 44
+byte ""
+byte 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+load 43
+load 41
+b-
+b|
+byte 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+load 44
+load 42
+b-
+b|
+concat
+app_global_put
+byte "num_untallied"
+byte "num_untallied"
+app_global_get
+int 1
++
+app_global_put
+byte "num_tallied"
+byte "num_tallied"
+app_global_get
+int 1
+-
+app_global_put
+load 40
+byte ""
+app_local_del
+callsub gettally_3
+retsub

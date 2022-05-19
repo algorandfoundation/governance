@@ -1,0 +1,19 @@
+{
+  "accAdmin": "3X6LHHO6L6S66L5YZGE4E74D3PEZ4Z7GC2R7F5XCSDSFELWBVUBFPMVDKA",
+  "accAdmin_phrase": "steel copy silver truck wait angle hotel miracle alter plastic gym wrestle prepare once begin success twelve derive convince quarter guitar gather recycle abstract stand",
+  "stakeToken": 26,
+  "stakePeriod": {
+    "period": 0,
+    "measures": 4,
+    "choicesPerMeasure": [ 4, 4, 4, 4 ],
+    "deadline1_signupEnd": 62,
+    "deadline2_voteStart": 63,
+    "deadline3_voteEnd": 64,
+    "deadline4_voteFinal": 65,
+    "deadline5_rewardStart": 66,
+    "deadline6_delete": 67,
+    "totalReward": 100,
+    "consManager": 27,
+    "consManagerAddr": "JGG23HSCT36KJY2ZLX75I5RGQOECCKG45X3YDBDNOKXZEQKHV635UAOZXA"
+  }
+}
