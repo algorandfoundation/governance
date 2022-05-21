@@ -1,5 +1,72 @@
 # Algorand Governance Voting
 
+## Introduction
+
+This app is a subsystem of Algorand governance. It is implemented as a PyTEAL
+smart contract that handles the voting part of governance. It is primarily
+intended to be used from the staking subsystem but some functions can also be
+called directly.
+
+#### Governance Period
+
+A year has four governance periods, each three months in length.
+
+#### Voting Session
+
+Each governance period has exactly one voting session. Each voting session can
+have 1-4 measures, with each having 2-4 options.
+
+#### Governor
+
+Participants in governance are called governors. To become a governor one has
+to soft-stake ALGO in the governance staking application.
+
+#### Governance Rewards
+
+A governor who votes and soft-stakes until the FINALIZED phase receives rewards
+for participating in governance.
+
+#### Soft-Staking
+
+Governors commit a certain amount of Algo to weigh their vote. To have their
+vote counted (and become eligible for rewards), this stake has to stay
+committed until FINALIZED. Any premature withdrawal is possible but invalidates
+the governors vote and eligibility for rewards.
+
+#### Staking Application
+
+One of two smart contracts that implements governance. The staking application
+is primarily an escrow contract holding the governors' funds for the duration
+of the governance period. It also drives the voting process.
+
+#### Voting Application
+
+The subject of this document. One of two smart contracts that implements
+governance. The voting application is responsible for tallying the votes of
+eligible governors.
+
+#### Temporary Hard-Staking
+
+The staking and voting applications are designed to allow withdrawal from
+governance at any time. Nonetheless, one edge-case exists that will cause a
+temporary lock on the stake. It is caused by a governor accidentally forcing a
+withdrawal (closeout/clearstate) from the voting app without withdrawing from
+the staking app first. This hard-lock only occurs after having voted and lasts
+until the FINALIZED phase.
+
+
+## Governance Phases
+
+Each governance period goes through a predefined set of phases. A period begins
+with deploying the staking and voting app, then letting them know the other's
+ID and address. At this point the voting app is INITIALIZED.
+
+The voting app will then have to be configured for the voting session. This
+will make the app CONFIGURED. Any phase transition thereafter is by timestamp.
+
+![phases_img](res/afgov_voting_phases.png)
+
+
 ## Global and Local State
 
 ### Global State
@@ -65,7 +132,7 @@ The app stores a single byte slices (type `bytes`) in an account's local storage
 
 ## API
 
-An ARC-004 compliant description of the voting API can be found in the
+An [ARC-004](https://github.com/algorandfoundation/ARCs/blob/main/ARCs/arc-0004.md) compliant description of the voting API can be found in the
 following file:
 - [src/resources/governance-api-voting.json](src/resources/governance-api-voting.json)
 
