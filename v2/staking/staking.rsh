@@ -10,7 +10,7 @@ const Vote = Array(Array(UInt, MaxChoices), MaxMeasures);
 const choices0 = Array.replicate(MaxChoices, 0);
 const vote0 = Array.replicate(MaxMeasures, choices0);
 const Deadline = UInt;
-const nowReal = thisConsensusSecs;
+const now = thisConsensusSecs;
 const MAddress = Maybe(Address);
 
 export const main = Reach.App(() => {
@@ -78,7 +78,6 @@ export const main = Reach.App(() => {
     // Although these functions are prefixed "Admin", we do NOT restrict who
     // can do them. Anyone could volunteer to do it if they'd like.
     Admin_delete: Fun([], Tuple(UInt, UInt)),
-    Admin_nop: Fun([], UInt),
   });
   const InfoStruct = Struct([
     ['stakePeriod', StakePeriod],
@@ -140,13 +139,12 @@ export const main = Reach.App(() => {
   const totalStakeN = () => sumf(AccM, (ad) => ad.stakeN);
   const totalStakeT = () => sumf(AccM, (ad) => ad.stakeT);
   const {
-    done, pnow, lnow,
-    currentVote,
+    done, currentVote,
     rewardedStakeN, rewardedStakeT,
     remainingStakeN, remainingStakeT, remainingReward
   } =
     parallelReduce({
-      done: false, pnow: nowReal(), lnow: 0,
+      done: false,
       currentVote: vote0,
       rewardedStakeN: 0,
       rewardedStakeT: 0,
@@ -155,9 +153,8 @@ export const main = Reach.App(() => {
       remainingReward: totalReward,
     })
     .define(() => {
-      const now = (p) => p ? pnow : nowReal();
-      const before = (p, x) => now(p) < x;
-      const after = (p, x) => x < now(p);
+      const before = (x) => now() < x;
+      const after = (x) => x < now();
 
       const remainingStake = remainingStakeN + remainingStakeT;
       const rewardedStake = rewardedStakeN + rewardedStakeT;
@@ -169,7 +166,7 @@ export const main = Reach.App(() => {
         remainingReward,
       }));
 
-      const rewardsStarted = after(false, deadline5_rewardStart);
+      const getRewardsStarted = () => after(deadline5_rewardStart);
       const remainingToRewarded = (cmp) => (
         true
         // There is no relationship between remaining and rewarded, because
@@ -178,150 +175,13 @@ export const main = Reach.App(() => {
         //&& cmp(remainingStakeT, rewardedStakeT)
         && cmp(remainingReward, totalReward)
       );
-
-      const doGovernor_stake = (gov, p, stakeN, stakeT, bene) => {
-        check(before(p, deadline1_signupEnd), "b signupEnd");
-        check(isNone(AccM[gov]), "unstaked");
-        const stake = stakeN + stakeT;
-        // This is not needed for correctness, but it is helpful so that people
-        // don't waste fees trying to unstake or get claims when they have no
-        // stake.
-        check(stake > 0, "positive stake");
-        return (k) => {
-          AccM[gov] = { stakeN, stakeT, bene, voted: false };
-          k(true);
-          Notify.stake(gov, stakeN, stakeT, bene);
-          return {
-            done: false, pnow: nowReal(), lnow: pnow,
-            currentVote,
-            rewardedStakeN, rewardedStakeT,
-            remainingStakeN: remainingStakeN + stakeN,
-            remainingStakeT: remainingStakeT + stakeT,
-            remainingReward,
-          };
-        };
-      };
-      const doGovernor_vote = (gov, p, vote) => {
-        check(after(p, deadline2_voteStart), "a voteStart");
-        check(before(p, deadline3_voteEnd), "b voteEnd");
-        const { stakeN, stakeT, stake, voted } = accGet(gov);
-        check(! voted, "hasn't voted yet");
-        return (k) => {
-          accUpd(gov, (_) => ({ voted: true }));
-          const voten = voteManager.Staking_vote.ALGO({
-            addressToAccount: true,
-          })(gov, stake, vote);
-          k(voten);
-          Notify.vote(gov, voten);
-          return {
-            done: false, pnow: nowReal(), lnow: pnow,
-            currentVote: voten,
-            rewardedStakeN: rewardedStakeN + stakeN,
-            rewardedStakeT: rewardedStakeT + stakeT,
-            remainingStakeN, remainingStakeT,
-            remainingReward,
-          };
-        };
-      };
-      const doGovernor_unvote = (gov, p) => {
-        check(after(p, deadline2_voteStart), "a voteStart");
-        check(before(p, deadline4_voteFinal), "b voteFinal");
-        const { stakeN, stakeT, voted } = accGet(gov);
-        check(voted, "has voted already");
-        return (k) => {
-          accUpd(gov, (_) => ({ voted: false }));
-          const voten = voteManager.Staking_withdraw.ALGO({
-            addressToAccount: true,
-          })(gov);
-          k(voten);
-          Notify.unvote(gov, voten);
-          return {
-            done: false, pnow: nowReal(), lnow: pnow,
-            currentVote: voten,
-            rewardedStakeN: rewardedStakeN - stakeN,
-            rewardedStakeT: rewardedStakeT - stakeT,
-            remainingStakeN, remainingStakeT,
-            remainingReward,
-          };
-        };
-      };
-      const doUnstake = (p, gov) => {
-        void p;
-        const { stake, stakeN, stakeT, voted, bene } = accGet(gov);
-        if ( voted ) {
-          check(rewardsStarted, "a rewardStart");
-        }
-        assert(stake <= remainingStake, "stake is portion of stake");
-        const shouldReward = rewardsStarted && voted;
-        const reward = (() => { if (shouldReward) { return muldiv(totalReward, stake, rewardedStake); } else { return 0; } })();
-        (hardTheorem ? assert : check)(reward <= remainingReward, "reward is portion of reward");
-        return (k) => {
-          delete AccM[gov];
-          transfer([
-            stakeN,
-            [ stakeT, stakeToken ]
-          ]).to(gov);
-          transfer(reward).to(bene);
-          k(reward);
-          Notify.unstake(gov, bene, stakeN, stakeT, reward);
-          return {
-            done: false, pnow: nowReal(), lnow: pnow,
-            currentVote,
-            rewardedStakeN, rewardedStakeT,
-            remainingStakeN: remainingStakeN - stakeN,
-            remainingStakeT: remainingStakeT - stakeT,
-            remainingReward: remainingReward - reward,
-          };
-        };
-      };
-      const doGovernor_unstake = (gov, p) => {
-        return doUnstake(p, gov);
-      };
-      const doOther_claimFor = (who, p, gov) => {
-        void who;
-        check(after(p, deadline5_rewardStart), "a rewardStart");
-        return doUnstake(p, gov);
-      };
-      const doAdmin_delete = (who, p) => {
-        void who;
-        check(after(p, deadline6_delete), "a delete");
-        return (k) => {
-          const rN = remainingStakeN + remainingReward;
-          const rT = remainingStakeT;
-          transfer([ rN, [ rT, stakeToken ] ]).to(Deployer);
-          k([rN, rT]);
-          Notify.deleted();
-          return {
-            done: true, pnow: nowReal(), lnow: pnow,
-            currentVote, rewardedStakeN, rewardedStakeT,
-            remainingStakeN: 0,
-            remainingStakeT: 0,
-            remainingReward: 0,
-          };
-        };
-      };
-      const doAdmin_nop = (who, p) => {
-        void who; void p;
-        check(lnow <= pnow);
-        const pnowp = nowReal();
-        return (k) => {
-          k(pnowp);
-          return {
-            done, pnow: pnowp, lnow: pnow,
-            currentVote,
-            rewardedStakeN, rewardedStakeT,
-            remainingStakeN, remainingStakeT,
-            remainingReward,
-          };
-        };
-      };
     })
     .invariant(implies(done, remainingReward == 0), "no reward when done")
     .invariant(balance() == remainingStakeN + remainingReward, "balance is stakeN + reward")
     .invariant(remainingStakeN == (done ? 0 : totalStakeN()), "stakeN is 0 when done")
     .invariant(balance(stakeToken) == remainingStakeT, "balance of token is stakeT")
     .invariant(remainingStakeT == (done ? 0 : totalStakeT()), "stakeT is 0 when done")
-    .invariant(implies(! done, (rewardsStarted ? remainingToRewarded(le) : remainingToRewarded(eq))), "remaining to reward")
+    .invariant(implies(! done, (getRewardsStarted() ? remainingToRewarded(le) : remainingToRewarded(eq))), "remaining to reward")
     // I would like this to be an =, but there could be an indivisible amount
     // of reward; we could compute what that will be and move the transfer after
     // this before it. This is a very expensive theorem to check. It is true, 
@@ -331,34 +191,132 @@ export const main = Reach.App(() => {
       ) : remainingReward <= totalReward), "hard theorem")
     .while( ! done )
     .paySpec([stakeToken])
-    .api(P.Governor_stake,
-      (stakeN, stakeT, bene) => { const _ = doGovernor_stake(this, true, stakeN, stakeT, bene); },
-      (stakeN, stakeT, _) => [ stakeN, [ stakeT, stakeToken ]],
-      (stakeN, stakeT, bene, ret) => doGovernor_stake(this, false, stakeN, stakeT, bene)(ret))
-    .api(P.Governor_vote,
-      (vote) => { const _ = doGovernor_vote(this, true, vote); },
-      (_) => [ 0, [0, stakeToken] ],
-      (vote, ret) => doGovernor_vote(this, false, vote)(ret))
-    .api(P.Governor_unvote,
-      () => { const _ = doGovernor_unvote(this, true); },
-      () => [ 0, [0, stakeToken] ],
-      (ret) => doGovernor_unvote(this, false)(ret))
-    .api(P.Governor_unstake,
-      () => { const _ = doGovernor_unstake(this, true); },
-      () => [ 0, [0, stakeToken] ],
-      (ret) => doGovernor_unstake(this, false)(ret))
-    .api(P.Other_claimFor,
-      (who) => { const _ = doOther_claimFor(this, true, who); },
-      (_) => [ 0, [0, stakeToken] ],
-      (who, ret) => doOther_claimFor(this, false, who)(ret))
-    .api(P.Admin_delete,
-      () => { const _ = doAdmin_delete(this, true); },
-      () => [ 0, [0, stakeToken] ],
-      (ret) => doAdmin_delete(this, false)(ret))
-    .api(P.Admin_nop,
-      () => { const _ = doAdmin_nop(this, true); },
-      () => [ 0, [0, stakeToken] ],
-      (ret) => doAdmin_nop(this, false)(ret))
+    .api_(P.Governor_stake, (stakeN, stakeT, bene) => {
+      const gov = this;
+      check(isNone(AccM[gov]), "unstaked");
+      const stake = stakeN + stakeT;
+      // This is not needed for correctness, but it is helpful so that people
+      // don't waste fees trying to unstake or get claims when they have no
+      // stake.
+      check(stake > 0, "positive stake");
+      return [ [ stakeN, [ stakeT, stakeToken ]], (k) => {
+        checked(before(deadline1_signupEnd), "b signupEnd");
+        AccM[gov] = { stakeN, stakeT, bene, voted: false };
+        k(true);
+        Notify.stake(gov, stakeN, stakeT, bene);
+        return {
+          done: false, currentVote,
+          rewardedStakeN, rewardedStakeT,
+          remainingStakeN: remainingStakeN + stakeN,
+          remainingStakeT: remainingStakeT + stakeT,
+          remainingReward,
+        };
+      }];
+    })
+    .api_(P.Governor_vote, (vote) => {
+      const gov = this;
+      const { stakeN, stakeT, stake, voted } = accGet(gov);
+      check(! voted, "hasn't voted yet");
+      return [ [ 0, [0, stakeToken] ], (k) => {
+        checked(after(deadline2_voteStart), "a voteStart");
+        checked(before(deadline3_voteEnd), "b voteEnd");
+        accUpd(gov, (_) => ({ voted: true }));
+        const voten = voteManager.Staking_vote.ALGO({
+          addressToAccount: true,
+        })(gov, stake, vote);
+        k(voten);
+        Notify.vote(gov, voten);
+        return {
+          done: false, currentVote: voten,
+          rewardedStakeN: rewardedStakeN + stakeN,
+          rewardedStakeT: rewardedStakeT + stakeT,
+          remainingStakeN, remainingStakeT,
+          remainingReward,
+        };
+      }];
+    })
+    .api_(P.Governor_unvote, () => {
+      const gov = this;
+      const { stakeN, stakeT, voted } = accGet(gov);
+      check(voted, "has voted already");
+      return [ [ 0, [0, stakeToken] ], (k) => {
+        checked(after(deadline2_voteStart), "a voteStart");
+        checked(before(deadline4_voteFinal), "b voteFinal");
+        accUpd(gov, (_) => ({ voted: false }));
+        const voten = voteManager.Staking_withdraw.ALGO({
+          addressToAccount: true,
+        })(gov);
+        k(voten);
+        Notify.unvote(gov, voten);
+        return {
+          done: false, currentVote: voten,
+          rewardedStakeN: rewardedStakeN - stakeN,
+          rewardedStakeT: rewardedStakeT - stakeT,
+          remainingStakeN, remainingStakeT,
+          remainingReward,
+        };
+      }];
+    })
+    .define(() => {
+      const doUnstake = (gov) => {
+        const { stake, stakeN, stakeT, voted, bene } = accGet(gov);
+        assert(stake <= remainingStake, "stake is portion of stake");
+        return [ [0, [0, stakeToken]], (k) => {
+          const rewardsStarted = getRewardsStarted();
+          const shouldReward = rewardsStarted && voted;
+          const reward = (() => { if (shouldReward) { return muldiv(totalReward, stake, rewardedStake); } else { return 0; } })();
+          (hardTheorem ? assert : checked)(reward <= remainingReward, "reward is portion of reward");
+          checked(implies(voted, rewardsStarted), "a rewardStart");
+          delete AccM[gov];
+          transfer([
+            stakeN,
+            [ stakeT, stakeToken ]
+          ]).to(gov);
+          transfer(reward).to(bene);
+          k(reward);
+          Notify.unstake(gov, bene, stakeN, stakeT, reward);
+          return {
+            done: false, currentVote,
+            rewardedStakeN, rewardedStakeT,
+            remainingStakeN: remainingStakeN - stakeN,
+            remainingStakeT: remainingStakeT - stakeT,
+            remainingReward: remainingReward - reward,
+          };
+        }];
+      };
+    })
+    .api_(P.Governor_unstake, () => {
+      const [ pay, doAfter ] = doUnstake(this);
+      return [ pay, (k) => {
+        return doAfter(k);
+      }]
+    })
+    .api_(P.Other_claimFor, (gov) => {
+      const [ pay, doAfter ] = doUnstake(gov);
+      return [ pay, (k) => {
+        checked(after(deadline5_rewardStart), "a rewardStart");
+        return doAfter(k);
+      }]
+    })
+    .api_(P.Admin_delete, () => {
+      const who = this;
+      void who;
+      return [ [ 0, [0, stakeToken] ], (k) => {
+        checked(after(deadline6_delete), "a delete");
+        const rN = remainingStakeN + remainingReward;
+        const rT = remainingStakeT;
+        transfer([ rN, [ rT, stakeToken ] ]).to(Deployer);
+        k([rN, rT]);
+        Notify.deleted();
+        return {
+          done: true, currentVote,
+          rewardedStakeN, rewardedStakeT,
+          remainingStakeN: 0,
+          remainingStakeT: 0,
+          remainingReward: 0,
+        };
+      }];
+    })
     .timeout(false);
   commit();
   exit();

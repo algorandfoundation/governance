@@ -38,59 +38,35 @@ store 6 // GV_wasMeth :: Bool
 dup
 int 1841614291
 <
-bnz l7_method_lt_1841614291
+bnz l6_method_lt_1841614291
 dup
 int 2587117256
 <
-bnz l8_method_lt_2587117256
-dup
-int 3123209626
-<
-bnz l9_method_lt_3123209626
+bnz l7_method_lt_2587117256
 dup
 int 4282603715
 <
-bnz l10_method_lt_4282603715
+bnz l8_method_lt_4282603715
 int 4282603715
 ==
 assert
 
-  // { l3_Governor_unstake
-  l3_Governor_unstake:
+  // { l2_Governor_unstake
+  l2_Governor_unstake:
   // API: Governor_unstake()uint64
   //  i(4282603715) h(ff4358c3) b64(/0NYww==)
   byte base64()
-  store 255 // v22624 :: Tuple()
-  byte base64(Aw==)
-  load 255 // v22624 :: Tuple()
+  store 255 // v18498 :: Tuple()
+  byte base64(Ag==)
+  load 255 // v18498 :: Tuple()
   concat
   int 128
   bzero
   concat
   b publish2
-  // l3_Governor_unstake }
+  // l2_Governor_unstake }
 
-l10_method_lt_4282603715:
-int 3123209626
-==
-assert
-
-  // { l1_Admin_nop
-  l1_Admin_nop:
-  // API: Admin_nop()uint64
-  //  i(3123209626) h(ba28659a) b64(uihlmg==)
-  byte base64()
-  store 255 // v22625 :: Tuple()
-  byte base64(AQ==)
-  load 255 // v22625 :: Tuple()
-  concat
-  int 128
-  bzero
-  concat
-  b publish2
-  // l1_Admin_nop }
-
-l9_method_lt_3123209626:
+l8_method_lt_4282603715:
 int 2587117256
 ==
 assert
@@ -100,9 +76,9 @@ assert
   // API: Admin_delete()(uint64,uint64)
   //  i(2587117256) h(9a3446c8) b64(mjRGyA==)
   byte base64()
-  store 255 // v22626 :: Tuple()
+  store 255 // v18499 :: Tuple()
   byte base64(AA==)
-  load 255 // v22626 :: Tuple()
+  load 255 // v18499 :: Tuple()
   concat
   int 128
   bzero
@@ -110,17 +86,17 @@ assert
   b publish2
   // l0_Admin_delete }
 
-l8_method_lt_2587117256:
+l7_method_lt_2587117256:
 dup
 int 2551297672
 <
-bnz l11_method_lt_2551297672
+bnz l9_method_lt_2551297672
 int 2551297672
 ==
 assert
 
-  // { l12_accountData
-  l12_accountData:
+  // { l10_accountData
+  l10_accountData:
   // View: accountData(address)(address,uint64,uint64,uint64,byte)
   //  i(2551297672) h(9811b688) b64(mBG2iA==)
   load 1 // GV_currentStep :: UInt
@@ -131,7 +107,7 @@ assert
     // { accountData_3
     txna ApplicationArgs 1
     dup
-    store 255 // v2310 :: Address
+    store 255 // v3452 :: Address
     int 8
     bzero
     concat
@@ -141,8 +117,8 @@ assert
     byte base64(AA==)
     concat
     // resource: R_Account
-    load 255 // v2310 :: Address
-    callsub l13_LF_cMapLoad
+    load 255 // v3452 :: Address
+    callsub l11_LF_cMapLoad
     dup
     store 253 // fromSome object
     extract 1 49
@@ -151,43 +127,43 @@ assert
     getbyte
     select
     dup
-    store 254 // v2314 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 254 // v3456 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     int 32
     extract_uint64
-    store 253 // v2315 :: UInt
-    load 254 // v2314 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 253 // v3457 :: UInt
+    load 254 // v3456 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     int 40
     extract_uint64
-    store 252 // v2316 :: UInt
-    load 254 // v2314 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 252 // v3458 :: UInt
+    load 254 // v3456 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     extract 0 32
-    load 253 // v2315 :: UInt
-    load 252 // v2316 :: UInt
+    load 253 // v3457 :: UInt
+    load 252 // v3458 :: UInt
     +
     itob
     concat
-    load 253 // v2315 :: UInt
+    load 253 // v3457 :: UInt
     itob
     concat
-    load 252 // v2316 :: UInt
+    load 252 // v3458 :: UInt
     itob
     concat
-    load 254 // v2314 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    load 254 // v3456 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     extract 48 1
     concat
     store 7 // GV_apiRet :: Null
     b apiReturn_check
     // accountData_3 }
 
-  // l12_accountData }
+  // l10_accountData }
 
-l11_method_lt_2551297672:
+l9_method_lt_2551297672:
 int 1841614291
 ==
 assert
 
-  // { l2_Governor_stake
-  l2_Governor_stake:
+  // { l1_Governor_stake
+  l1_Governor_stake:
   // API: Governor_stake(uint64,uint64,address)byte
   //  i(1841614291) h(6dc4cdd3) b64(bcTN0w==)
   txna ApplicationArgs 1
@@ -195,75 +171,75 @@ assert
   concat
   txna ApplicationArgs 3
   concat
-  store 255 // v22627 :: Tuple(UInt, UInt, Address)
-  byte base64(Ag==)
-  load 255 // v22627 :: Tuple(UInt, UInt, Address)
+  store 255 // v18500 :: Tuple(UInt, UInt, Address)
+  byte base64(AQ==)
+  load 255 // v18500 :: Tuple(UInt, UInt, Address)
   concat
   int 80
   bzero
   concat
   b publish2
-  // l2_Governor_stake }
+  // l1_Governor_stake }
 
-l7_method_lt_1841614291:
+l6_method_lt_1841614291:
 dup
 int 573900209
 <
-bnz l14_method_lt_573900209
+bnz l12_method_lt_573900209
 dup
 int 1330302898
 <
-bnz l15_method_lt_1330302898
+bnz l13_method_lt_1330302898
 int 1330302898
 ==
 assert
 
-  // { l4_Governor_unvote
-  l4_Governor_unvote:
+  // { l3_Governor_unvote
+  l3_Governor_unvote:
   // API: Governor_unvote()uint64[4][4]
   //  i(1330302898) h(4f4acfb2) b64(T0rPsg==)
   byte base64()
-  store 255 // v22628 :: Tuple()
-  byte base64(BA==)
-  load 255 // v22628 :: Tuple()
+  store 255 // v18501 :: Tuple()
+  byte base64(Aw==)
+  load 255 // v18501 :: Tuple()
   concat
   int 128
   bzero
   concat
   b publish2
-  // l4_Governor_unvote }
+  // l3_Governor_unvote }
 
-l15_method_lt_1330302898:
+l13_method_lt_1330302898:
 int 573900209
 ==
 assert
 
-  // { l6_Other_claimFor
-  l6_Other_claimFor:
+  // { l5_Other_claimFor
+  l5_Other_claimFor:
   // API: Other_claimFor(address)uint64
   //  i(573900209) h(223505b1) b64(IjUFsQ==)
   txna ApplicationArgs 1
-  store 255 // v22629 :: Tuple(Address)
-  byte base64(Bg==)
-  load 255 // v22629 :: Tuple(Address)
+  store 255 // v18502 :: Tuple(Address)
+  byte base64(BQ==)
+  load 255 // v18502 :: Tuple(Address)
   concat
   int 96
   bzero
   concat
   b publish2
-  // l6_Other_claimFor }
+  // l5_Other_claimFor }
 
-l14_method_lt_573900209:
+l12_method_lt_573900209:
 dup
 int 395221898
 <
-bnz l16_method_lt_395221898
+bnz l14_method_lt_395221898
 int 395221898
 ==
 assert
 
-  // { l17_Info
-  l17_Info:
+  // { l15_Info
+  l15_Info:
   // View: Info()((uint64,uint64,address,uint64,address,uint64,uint64[4],uint64,uint64,uint64,uint64,uint64,uint64,uint64),uint64,uint64[4][4],uint64,uint64,uint64,uint64,uint64,uint64,uint64)
   //  i(395221898) h(178e9b8a) b64(F46big==)
   load 1 // GV_currentStep :: UInt
@@ -295,37 +271,37 @@ assert
     extract3
     concat
     load 3 // GV_svs :: Null
-    int 481
+    int 464
     int 8
     extract3
     concat
     load 3 // GV_svs :: Null
-    int 457
+    int 440
     int 8
     extract3
     concat
     load 3 // GV_svs :: Null
-    int 465
+    int 448
     int 8
     extract3
     concat
     load 3 // GV_svs :: Null
-    int 473
+    int 456
     int 8
     extract3
     concat
     load 3 // GV_svs :: Null
-    int 441
+    int 424
     int 8
     extract3
     concat
     load 3 // GV_svs :: Null
-    int 449
+    int 432
     int 8
     extract3
     concat
     load 3 // GV_svs :: Null
-    int 433
+    int 416
     int 8
     extract3
     concat
@@ -333,24 +309,24 @@ assert
     b apiReturn_check
     // Info_3 }
 
-  // l17_Info }
+  // l15_Info }
 
-l16_method_lt_395221898:
+l14_method_lt_395221898:
 int 261267333
 ==
 assert
 
-  // { l5_Governor_vote
-  l5_Governor_vote:
+  // { l4_Governor_vote
+  l4_Governor_vote:
   // API: Governor_vote(uint64[4][4])uint64[4][4]
   //  i(261267333) h(f929f85) b64(D5KfhQ==)
   txna ApplicationArgs 1
-  store 255 // v22632 :: Tuple(Array(Array(UInt, 4), 4))
-  byte base64(BQ==)
-  load 255 // v22632 :: Tuple(Array(Array(UInt, 4), 4))
+  store 255 // v18505 :: Tuple(Array(Array(UInt, 4), 4))
+  byte base64(BA==)
+  load 255 // v18505 :: Tuple(Array(Array(UInt, 4), 4))
   concat
   b publish2
-  // l5_Governor_vote }
+  // l4_Governor_vote }
 
 publish:
 txna ApplicationArgs 2
@@ -362,7 +338,7 @@ btoi
 dup
 int 2
 <
-bnz l18_publish_lt_2
+bnz l16_publish_lt_2
 int 2
 ==
 assert
@@ -407,116 +383,95 @@ assert
   dup2
   dup2
   dup2
-  dup2
   extract 0 32
-  store 255 // Deployer/2263 :: Address
+  store 255 // Deployer/3397 :: Address
   extract 32 184
-  store 254 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  store 254 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   int 216
   extract_uint64
-  store 253 // stakeToken/2265 :: Token
+  store 253 // stakeToken/3399 :: Token
   int 224
   extract_uint64
-  store 252 // v2275 :: UInt
+  store 252 // v3409 :: UInt
   int 232
   extract_uint64
-  store 251 // voteManager/2285 :: Contract
+  store 251 // voteManager/3419 :: Contract
   int 240
   extract_uint64
-  store 250 // deadline1_signupEnd/2287 :: UInt
+  store 250 // deadline1_signupEnd/3421 :: UInt
   int 248
   extract_uint64
-  store 249 // deadline2_voteStart/2288 :: UInt
+  store 249 // deadline2_voteStart/3422 :: UInt
   int 256
   extract_uint64
-  store 248 // deadline3_voteEnd/2289 :: UInt
+  store 248 // deadline3_voteEnd/3423 :: UInt
   int 264
   extract_uint64
-  store 247 // deadline4_voteFinal/2290 :: UInt
+  store 247 // deadline4_voteFinal/3424 :: UInt
   int 272
   extract_uint64
-  store 246 // deadline5_rewardStart/2291 :: UInt
+  store 246 // deadline5_rewardStart/3425 :: UInt
   int 280
   extract_uint64
-  store 245 // deadline6_delete/2292 :: UInt
+  store 245 // deadline6_delete/3426 :: UInt
   int 288
   int 128
   extract3
-  store 244 // currentVote/2331 :: Array(Array(UInt, 4), 4)
-  int 425
+  store 244 // currentVote/3472 :: Array(Array(UInt, 4), 4)
+  int 416
   extract_uint64
-  store 243 // pnow/2334 :: UInt
-  int 433
+  store 243 // remainingReward/3474 :: UInt
+  int 424
   extract_uint64
-  store 242 // remainingReward/2335 :: UInt
-  int 441
+  store 242 // remainingStakeN/3475 :: UInt
+  int 432
   extract_uint64
-  store 241 // remainingStakeN/2336 :: UInt
-  int 449
+  store 241 // remainingStakeT/3476 :: UInt
+  int 440
   extract_uint64
-  store 240 // remainingStakeT/2337 :: UInt
-  int 457
+  store 240 // rewardedStakeN/3477 :: UInt
+  int 448
   extract_uint64
-  store 239 // rewardedStakeN/2338 :: UInt
-  int 465
+  store 239 // rewardedStakeT/3478 :: UInt
+  int 464
   extract_uint64
-  store 238 // rewardedStakeT/2339 :: UInt
-  int 481
-  extract_uint64
-  store 237 // rewardedStake/2414 :: UInt
-  int 489
-  int 1
-  extract3
-  btoi
-  store 236 // rewardsStarted/2418 :: Bool
+  store 238 // rewardedStake/3539 :: UInt
   dup
   store 5 // GV_argMsg :: Null
-  store 235 // .fork340.msg/2680 :: Data({"Admin_delete0_340": Tuple(), "Admin_nop0_340": Tuple(), "Governor_stake0_340": Tuple(UInt, UInt, Address), "Governor_unstake0_340": Tuple(), "Governor_unvote0_340": Tuple(), "Governor_vote0_340": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_340": Tuple(Address)})
+  store 237 // .fork544.msg/3838 :: Data({"Admin_delete0_544": Tuple(), "Governor_stake0_544": Tuple(UInt, UInt, Address), "Governor_unstake0_544": Tuple(), "Governor_unvote0_544": Tuple(), "Governor_vote0_544": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_544": Tuple(Address)})
   byte base64(30ybmQ==)
-  load 235 // .fork340.msg/2680 :: Data({"Admin_delete0_340": Tuple(), "Admin_nop0_340": Tuple(), "Governor_stake0_340": Tuple(UInt, UInt, Address), "Governor_unstake0_340": Tuple(), "Governor_unvote0_340": Tuple(), "Governor_vote0_340": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_340": Tuple(Address)})
+  load 237 // .fork544.msg/3838 :: Data({"Admin_delete0_544": Tuple(), "Governor_stake0_544": Tuple(UInt, UInt, Address), "Governor_unstake0_544": Tuple(), "Governor_unvote0_544": Tuple(), "Governor_vote0_544": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_544": Tuple(Address)})
   concat
   log // up to 133 bytes
-  load 235 // .fork340.msg/2680 :: Data({"Admin_delete0_340": Tuple(), "Admin_nop0_340": Tuple(), "Governor_stake0_340": Tuple(UInt, UInt, Address), "Governor_unstake0_340": Tuple(), "Governor_unvote0_340": Tuple(), "Governor_vote0_340": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_340": Tuple(Address)})
+  load 237 // .fork544.msg/3838 :: Data({"Admin_delete0_544": Tuple(), "Governor_stake0_544": Tuple(UInt, UInt, Address), "Governor_unstake0_544": Tuple(), "Governor_unvote0_544": Tuple(), "Governor_vote0_544": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_544": Tuple(Address)})
   int 0
   getbyte
   dup
   int 3
   <
-  bnz l19_Switch_lt_3
+  bnz l17_Switch_lt_3
+  dup
+  int 4
+  <
+  bnz l18_Switch_lt_4
   dup
   int 5
   <
-  bnz l20_Switch_lt_5
-  dup
-  int 6
-  <
-  bnz l21_Switch_lt_6
-  int 6
+  bnz l19_Switch_lt_5
+  int 5
   ==
   assert
 
-    // { l22_Switch_Other_claimFor0_340
-    l22_Switch_Other_claimFor0_340:
-    load 235 // .fork340.msg/2680 :: Data({"Admin_delete0_340": Tuple(), "Admin_nop0_340": Tuple(), "Governor_stake0_340": Tuple(UInt, UInt, Address), "Governor_unstake0_340": Tuple(), "Governor_unvote0_340": Tuple(), "Governor_vote0_340": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_340": Tuple(Address)})
+    // { l20_Switch_Other_claimFor0_544
+    l20_Switch_Other_claimFor0_544:
+    load 237 // .fork544.msg/3838 :: Data({"Admin_delete0_544": Tuple(), "Governor_stake0_544": Tuple(UInt, UInt, Address), "Governor_unstake0_544": Tuple(), "Governor_unvote0_544": Tuple(), "Governor_vote0_544": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_544": Tuple(Address)})
     extract 1 32
-    store 234 // data_id/5785 :: Tuple(Address)
+    store 236 // data_id/6681 :: Tuple(Address)
     // CompanionLabel True "api_Other_claimFor"
     api_Other_claimFor:
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    load 234 // data_id/5785 :: Tuple(Address)
-    store 233 // gov/6250 :: Address
-    load 246 // deadline5_rewardStart/2291 :: UInt
-    global LatestTimestamp
-    <
-    assert
-    // ^ Claim: a rewardStart
-    // at ./index.rsh:282:14:application
-    // at ./index.rsh:353:37:application call to "doOther_claimFor" (defined at: ./index.rsh:280:46:function exp)
-    // at ./index.rsh:353:18:application call to [unknown function] (defined at: ./index.rsh:353:18:function exp)
-    load 233 // gov/6250 :: Address
+    load 236 // data_id/6681 :: Tuple(Address)
+    dup
+    store 235 // who/6773 :: Address
     int 8
     bzero
     concat
@@ -526,70 +481,74 @@ assert
     byte base64(AA==)
     concat
     // resource: R_Account
-    load 233 // gov/6250 :: Address
-    callsub l13_LF_cMapLoad
+    load 235 // who/6773 :: Address
+    callsub l11_LF_cMapLoad
     dup
-    store 231 // fromSome object
+    store 233 // fromSome object
     extract 1 49
-    load 231 // fromSome object
+    load 233 // fromSome object
     int 0
     getbyte
     select
     dup
-    store 232 // adp/6256 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 234 // adp/6777 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     int 32
     extract_uint64
-    store 231 // stakeN/6257 :: UInt
-    load 232 // adp/6256 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 233 // stakeN/6778 :: UInt
+    load 234 // adp/6777 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     int 40
     extract_uint64
-    store 230 // stakeT/6258 :: UInt
-    load 232 // adp/6256 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 232 // stakeT/6779 :: UInt
+    // ^ CheckPay
+    // at ./index.rsh:146:19:dot
+    // ^ CheckPay
+    // at ./index.rsh:146:19:dot
+    load 234 // adp/6777 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     extract 0 32
-    store 229 // bene/6260 :: Address
-    load 232 // adp/6256 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 231 // bene/7201 :: Address
+    load 234 // adp/6777 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     extract 48 1
     btoi
-    dup
-    store 228 // voted/6263 :: Bool
-    bz l23_localIfF
-    load 236 // rewardsStarted/2418 :: Bool
+    store 230 // x/7204 :: Bool
+    load 246 // deadline5_rewardStart/3425 :: UInt
+    global LatestTimestamp
+    <
     assert
     // ^ Claim: a rewardStart
-    // at ./index.rsh:252:16:application
-    // at ./index.rsh:283:25:application call to "doUnstake" (defined at: ./index.rsh:248:34:function exp)
-    // at ./index.rsh:353:37:application call to "doOther_claimFor" (defined at: ./index.rsh:280:46:function exp)
-    // at ./index.rsh:353:18:application call to [unknown function] (defined at: ./index.rsh:353:18:function exp)
-    b l24_localIfK
-    l23_localIfF:
-    l24_localIfK:
-    load 236 // rewardsStarted/2418 :: Bool
-    load 228 // voted/6263 :: Bool
-    &&
-    bz l25_localIfF
-    load 252 // v2275 :: UInt
-    load 231 // stakeN/6257 :: UInt
-    load 230 // stakeT/6258 :: UInt
+    // at ./index.rsh:297:16:application
+    // at ./index.rsh:296:25:application call to [unknown function] (defined at: ./index.rsh:296:25:function exp)
+    load 230 // x/7204 :: Bool
+    bz l21_localIfF
+    load 252 // v3409 :: UInt
+    load 233 // stakeN/6778 :: UInt
+    load 232 // stakeT/6779 :: UInt
     +
     mulw
-    load 237 // rewardedStake/2414 :: UInt
+    load 238 // rewardedStake/3539 :: UInt
     divw
-    store 227 // reward/6267 :: UInt
-    b l26_localIfK
-    l25_localIfF:
+    store 229 // reward/7213 :: UInt
+    b l22_localIfK
+    l21_localIfF:
     int 0
-    store 227 // reward/6267 :: UInt
-    l26_localIfK:
-    load 227 // reward/6267 :: UInt
-    load 242 // remainingReward/2335 :: UInt
+    store 229 // reward/7213 :: UInt
+    l22_localIfK:
+    load 229 // reward/7213 :: UInt
+    load 243 // remainingReward/3474 :: UInt
     <=
     assert
     // ^ Claim: reward is portion of reward
-    // at ./index.rsh:257:39:application
-    // at ./index.rsh:283:25:application call to "doUnstake" (defined at: ./index.rsh:248:34:function exp)
-    // at ./index.rsh:353:37:application call to "doOther_claimFor" (defined at: ./index.rsh:280:46:function exp)
-    // at ./index.rsh:353:18:application call to [unknown function] (defined at: ./index.rsh:353:18:function exp)
-    load 233 // gov/6250 :: Address
+    // at ./index.rsh:268:43:application
+    // at ./index.rsh:298:23:application call to "doAfter" (defined at: ./index.rsh:264:44:function exp)
+    // at ./index.rsh:296:25:application call to [unknown function] (defined at: ./index.rsh:296:25:function exp)
+    load 230 // x/7204 :: Bool
+    int 1
+    ||
+    assert
+    // ^ Claim: a rewardStart
+    // at ./index.rsh:269:18:application
+    // at ./index.rsh:298:23:application call to "doAfter" (defined at: ./index.rsh:264:44:function exp)
+    // at ./index.rsh:296:25:application call to [unknown function] (defined at: ./index.rsh:296:25:function exp)
+    load 235 // who/6773 :: Address
     byte base64(AA==)
     int 50
     bzero
@@ -599,11 +558,11 @@ assert
       itxn_begin
       int 0
       itxn_field Fee
-      load 231 // stakeN/6257 :: UInt
+      load 233 // stakeN/6778 :: UInt
       itxn_field Amount
       int pay
       itxn_field TypeEnum
-      load 233 // gov/6250 :: Address
+      load 235 // who/6773 :: Address
       itxn_field Receiver
       itxn_submit
       // makeTxn }
@@ -613,14 +572,14 @@ assert
       itxn_begin
       int 0
       itxn_field Fee
-      load 230 // stakeT/6258 :: UInt
+      load 232 // stakeT/6779 :: UInt
       itxn_field AssetAmount
       int axfer
       itxn_field TypeEnum
-      load 233 // gov/6250 :: Address
+      load 235 // who/6773 :: Address
       itxn_field AssetReceiver
       // resource: R_Asset
-      load 253 // stakeToken/2265 :: Token
+      load 253 // stakeToken/3399 :: Token
       itxn_field XferAsset
       itxn_submit
       // makeTxn }
@@ -630,100 +589,77 @@ assert
       itxn_begin
       int 0
       itxn_field Fee
-      load 227 // reward/6267 :: UInt
+      load 229 // reward/7213 :: UInt
       itxn_field Amount
       int pay
       itxn_field TypeEnum
       // resource: R_Account
-      load 229 // bene/6260 :: Address
+      load 231 // bene/7201 :: Address
       itxn_field Receiver
       itxn_submit
       // makeTxn }
 
-    byte base64(AAAAAAAAGHs=)
-    load 227 // reward/6267 :: UInt
+    byte base64(AAAAAAAAHC0=)
+    load 229 // reward/7213 :: UInt
     itob
     concat
     log // up to 16 bytes
-    load 227 // reward/6267 :: UInt
+    load 229 // reward/7213 :: UInt
     itob
     store 7 // GV_apiRet :: Null
     byte base64(H+fCyQ==)
-    load 233 // gov/6250 :: Address
+    load 235 // who/6773 :: Address
     concat
-    load 229 // bene/6260 :: Address
+    load 231 // bene/7201 :: Address
     concat
-    load 231 // stakeN/6257 :: UInt
+    load 233 // stakeN/6778 :: UInt
     itob
     concat
-    load 230 // stakeT/6258 :: UInt
+    load 232 // stakeT/6779 :: UInt
     itob
     concat
-    load 227 // reward/6267 :: UInt
+    load 229 // reward/7213 :: UInt
     itob
     concat
     log // up to 92 bytes
-    load 255 // Deployer/2263 :: Address
-    load 254 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
-    load 253 // stakeToken/2265 :: Token
-    load 252 // v2275 :: UInt
-    load 251 // voteManager/2285 :: Contract
-    load 250 // deadline1_signupEnd/2287 :: UInt
-    load 249 // deadline2_voteStart/2288 :: UInt
-    load 248 // deadline3_voteEnd/2289 :: UInt
-    load 247 // deadline4_voteFinal/2290 :: UInt
-    load 246 // deadline5_rewardStart/2291 :: UInt
-    load 245 // deadline6_delete/2292 :: UInt
-    load 244 // currentVote/2331 :: Array(Array(UInt, 4), 4)
+    load 255 // Deployer/3397 :: Address
+    load 254 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+    load 253 // stakeToken/3399 :: Token
+    load 252 // v3409 :: UInt
+    load 251 // voteManager/3419 :: Contract
+    load 250 // deadline1_signupEnd/3421 :: UInt
+    load 249 // deadline2_voteStart/3422 :: UInt
+    load 248 // deadline3_voteEnd/3423 :: UInt
+    load 247 // deadline4_voteFinal/3424 :: UInt
+    load 246 // deadline5_rewardStart/3425 :: UInt
+    load 245 // deadline6_delete/3426 :: UInt
+    load 244 // currentVote/3472 :: Array(Array(UInt, 4), 4)
     int 0
-    load 243 // pnow/2334 :: UInt
-    global LatestTimestamp
-    load 242 // remainingReward/2335 :: UInt
-    load 227 // reward/6267 :: UInt
+    load 243 // remainingReward/3474 :: UInt
+    load 229 // reward/7213 :: UInt
     -
-    load 241 // remainingStakeN/2336 :: UInt
-    load 231 // stakeN/6257 :: UInt
+    load 242 // remainingStakeN/3475 :: UInt
+    load 233 // stakeN/6778 :: UInt
     -
-    load 240 // remainingStakeT/2337 :: UInt
-    load 230 // stakeT/6258 :: UInt
+    load 241 // remainingStakeT/3476 :: UInt
+    load 232 // stakeT/6779 :: UInt
     -
-    load 239 // rewardedStakeN/2338 :: UInt
-    load 238 // rewardedStakeT/2339 :: UInt
+    load 240 // rewardedStakeN/3477 :: UInt
+    load 239 // rewardedStakeT/3478 :: UInt
     global Round
-    global LatestTimestamp
     b loopBody1
-    // l22_Switch_Other_claimFor0_340 }
+    // l20_Switch_Other_claimFor0_544 }
 
-  l21_Switch_lt_6:
+  l19_Switch_lt_5:
   pop
 
-    // { l27_Switch_Governor_vote0_340
-    l27_Switch_Governor_vote0_340:
-    load 235 // .fork340.msg/2680 :: Data({"Admin_delete0_340": Tuple(), "Admin_nop0_340": Tuple(), "Governor_stake0_340": Tuple(UInt, UInt, Address), "Governor_unstake0_340": Tuple(), "Governor_unvote0_340": Tuple(), "Governor_vote0_340": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_340": Tuple(Address)})
+    // { l23_Switch_Governor_vote0_544
+    l23_Switch_Governor_vote0_544:
+    load 237 // .fork544.msg/3838 :: Data({"Admin_delete0_544": Tuple(), "Governor_stake0_544": Tuple(UInt, UInt, Address), "Governor_unstake0_544": Tuple(), "Governor_unvote0_544": Tuple(), "Governor_vote0_544": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_544": Tuple(Address)})
     extract 1 128
-    store 234 // data_id/5268 :: Tuple(Array(Array(UInt, 4), 4))
+    store 236 // data_id/6113 :: Tuple(Array(Array(UInt, 4), 4))
     // CompanionLabel True "api_Governor_vote"
     api_Governor_vote:
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    load 249 // deadline2_voteStart/2288 :: UInt
-    global LatestTimestamp
-    <
-    assert
-    // ^ Claim: a voteStart
-    // at ./index.rsh:205:14:application
-    // at ./index.rsh:341:37:application call to "doGovernor_vote" (defined at: ./index.rsh:204:46:function exp)
-    // at ./index.rsh:341:19:application call to [unknown function] (defined at: ./index.rsh:341:19:function exp)
-    global LatestTimestamp
-    load 248 // deadline3_voteEnd/2289 :: UInt
-    <
-    assert
-    // ^ Claim: b voteEnd
-    // at ./index.rsh:206:14:application
-    // at ./index.rsh:341:37:application call to "doGovernor_vote" (defined at: ./index.rsh:204:46:function exp)
-    // at ./index.rsh:341:19:application call to [unknown function] (defined at: ./index.rsh:341:19:function exp)
     txn Sender
     int 8
     bzero
@@ -734,252 +670,81 @@ assert
     byte base64(AA==)
     concat
     txn Sender
-    callsub l13_LF_cMapLoad
+    callsub l11_LF_cMapLoad
     dup
-    store 232 // fromSome object
+    store 234 // fromSome object
     extract 1 49
-    load 232 // fromSome object
+    load 234 // fromSome object
     int 0
     getbyte
     select
     dup
-    store 233 // adp/5584 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
-    int 32
-    extract_uint64
-    store 232 // stakeN/5585 :: UInt
-    load 233 // adp/5584 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
-    int 40
-    extract_uint64
-    store 231 // stakeT/5586 :: UInt
-    load 233 // adp/5584 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 235 // adp/6187 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     extract 48 1
     btoi
     !
     assert
     // ^ Claim: hasn't voted yet
-    // at ./index.rsh:208:14:application
-    // at ./index.rsh:341:37:application call to "doGovernor_vote" (defined at: ./index.rsh:204:46:function exp)
-    // at ./index.rsh:341:19:application call to [unknown function] (defined at: ./index.rsh:341:19:function exp)
-    txn Sender
-    byte base64(AA==)
-    byte base64(AQ==)
-    load 233 // adp/5584 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
-    extract 0 32
-    load 232 // stakeN/5585 :: UInt
-    itob
-    concat
-    load 231 // stakeT/5586 :: UInt
-    itob
-    concat
-    byte base64(AQ==)
-    concat
-    concat
-    app_local_put
-    byte base64(YXBwSUQ=)
-    load 251 // voteManager/2285 :: Contract
-    itob
-    concat
-    sha512_256
-    store 229 // remote address
-    // resource: R_Account
-    global CurrentApplicationAddress
-    balance
-    global CurrentApplicationAddress
-    min_balance
-    -
-    itob
-    store 228 // pre balances
-    itxn_begin
-    int 0
-    itxn_field Fee
-    int appl
-    itxn_field TypeEnum
-    load 251 // voteManager/2285 :: Contract
-    // resource: R_App
-    itxn_field ApplicationID
-    byte base64(SHlLRg==)
-    itxn_field ApplicationArgs
-    txn Sender
-    itxn_field Accounts
-    byte base64(AAAAAAAAAAE=)
-    itxn_field ApplicationArgs
-    load 232 // stakeN/5585 :: UInt
-    load 231 // stakeT/5586 :: UInt
-    +
-    itob
-    itxn_field ApplicationArgs
-    load 234 // data_id/5268 :: Tuple(Array(Array(UInt, 4), 4))
-    itxn_field ApplicationArgs
-    itxn_submit
-    // ^ Remote: Staking_vote(account,uint64,uint64[4][4])uint64[4][4]
-    // at ./index.rsh:213:13:application
-    // at ./index.rsh:341:56:application call to [unknown function] (defined at: ./index.rsh:209:20:function exp)
-    // at ./index.rsh:341:19:application call to [unknown function] (defined at: ./index.rsh:341:19:function exp)
-    global CurrentApplicationAddress
-    balance
-    global CurrentApplicationAddress
-    min_balance
-    -
-    load 228 // pre balances
-    btoi
-    -
-    itob
-    gitxn 0 LastLog
-    extract 4 0
-    concat
-    store 230 // v5631 :: Tuple(UInt, Array(Array(UInt, 4), 4))
-    byte base64(AAAAAAAAFf8=)
-    load 230 // v5631 :: Tuple(UInt, Array(Array(UInt, 4), 4))
-    concat
-    log // up to 144 bytes
-    load 230 // v5631 :: Tuple(UInt, Array(Array(UInt, 4), 4))
-    dup
-    store 229 // v5632 :: Tuple(UInt, Array(Array(UInt, 4), 4))
-    extract 8 128
-    store 228 // v5635 :: Array(Array(UInt, 4), 4)
-    int 0
-    load 229 // v5632 :: Tuple(UInt, Array(Array(UInt, 4), 4))
-    int 0
+    // at reach standard library:57:5:application
+    // at ./index.rsh:219:12:application call to "check" (defined at: reach standard library:49:32:function exp)
+    // at ./index.rsh:216:35:application call to [unknown function] (defined at: ./index.rsh:216:35:function exp)
+    // at ./index.rsh:146:19:application call to [unknown function] (defined at: ./index.rsh:216:35:function exp)
+    // at ./index.rsh:146:19:application call to [unknown function] (defined at: ./index.rsh:146:19:function exp)
+    // at ./index.rsh:193:14:application call to [unknown function] (defined at: ./index.rsh:193:14:function exp)
+    // ^ CheckPay
+    // at ./index.rsh:146:19:dot
+    // ^ CheckPay
+    // at ./index.rsh:146:19:dot
+    load 235 // adp/6187 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    int 32
     extract_uint64
-    ==
-    assert
-    // ^ Claim: remote bill check
-    // at ./index.rsh:213:13:application
-    // at ./index.rsh:341:56:application call to [unknown function] (defined at: ./index.rsh:209:20:function exp)
-    // at ./index.rsh:341:19:application call to [unknown function] (defined at: ./index.rsh:341:19:function exp)
-    byte base64(AAAAAAAAFgM=)
-    load 228 // v5635 :: Array(Array(UInt, 4), 4)
-    concat
-    log // up to 136 bytes
-    load 228 // v5635 :: Array(Array(UInt, 4), 4)
-    store 7 // GV_apiRet :: Null
-    byte base64(Ly79lg==)
-    txn Sender
-    concat
-    load 228 // v5635 :: Array(Array(UInt, 4), 4)
-    concat
-    log // up to 164 bytes
-    load 255 // Deployer/2263 :: Address
-    load 254 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
-    load 253 // stakeToken/2265 :: Token
-    load 252 // v2275 :: UInt
-    load 251 // voteManager/2285 :: Contract
-    load 250 // deadline1_signupEnd/2287 :: UInt
-    load 249 // deadline2_voteStart/2288 :: UInt
-    load 248 // deadline3_voteEnd/2289 :: UInt
-    load 247 // deadline4_voteFinal/2290 :: UInt
-    load 246 // deadline5_rewardStart/2291 :: UInt
-    load 245 // deadline6_delete/2292 :: UInt
-    load 228 // v5635 :: Array(Array(UInt, 4), 4)
-    int 0
-    load 243 // pnow/2334 :: UInt
-    global LatestTimestamp
-    load 242 // remainingReward/2335 :: UInt
-    load 241 // remainingStakeN/2336 :: UInt
-    load 240 // remainingStakeT/2337 :: UInt
-    load 239 // rewardedStakeN/2338 :: UInt
-    load 232 // stakeN/5585 :: UInt
-    +
-    load 238 // rewardedStakeT/2339 :: UInt
-    load 231 // stakeT/5586 :: UInt
-    +
-    global Round
-    global LatestTimestamp
-    b loopBody1
-    // l27_Switch_Governor_vote0_340 }
-
-  l20_Switch_lt_5:
-  dup
-  int 4
-  <
-  bnz l28_Switch_lt_4
-  pop
-
-    // { l29_Switch_Governor_unvote0_340
-    l29_Switch_Governor_unvote0_340:
-    // CompanionLabel True "api_Governor_unvote"
-    api_Governor_unvote:
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    load 249 // deadline2_voteStart/2288 :: UInt
+    store 234 // stakeN/6473 :: UInt
+    load 235 // adp/6187 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    int 40
+    extract_uint64
+    store 233 // stakeT/6474 :: UInt
+    load 249 // deadline2_voteStart/3422 :: UInt
     global LatestTimestamp
     <
     assert
     // ^ Claim: a voteStart
-    // at ./index.rsh:227:14:application
-    // at ./index.rsh:345:33:application call to "doGovernor_unvote" (defined at: ./index.rsh:226:42:function exp)
-    // at ./index.rsh:345:13:application call to [unknown function] (defined at: ./index.rsh:345:13:function exp)
+    // at ./index.rsh:221:16:application
+    // at ./index.rsh:220:44:application call to [unknown function] (defined at: ./index.rsh:220:44:function exp)
     global LatestTimestamp
-    load 247 // deadline4_voteFinal/2290 :: UInt
+    load 248 // deadline3_voteEnd/3423 :: UInt
     <
     assert
-    // ^ Claim: b voteFinal
-    // at ./index.rsh:228:14:application
-    // at ./index.rsh:345:33:application call to "doGovernor_unvote" (defined at: ./index.rsh:226:42:function exp)
-    // at ./index.rsh:345:13:application call to [unknown function] (defined at: ./index.rsh:345:13:function exp)
-    txn Sender
-    int 8
-    bzero
-    concat
-    int 8
-    bzero
-    concat
-    byte base64(AA==)
-    concat
-    txn Sender
-    callsub l13_LF_cMapLoad
-    dup
-    store 233 // fromSome object
-    extract 1 49
-    load 233 // fromSome object
-    int 0
-    getbyte
-    select
-    dup
-    store 234 // adp/4952 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
-    int 32
-    extract_uint64
-    store 233 // stakeN/4953 :: UInt
-    load 234 // adp/4952 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
-    int 40
-    extract_uint64
-    store 232 // stakeT/4954 :: UInt
-    load 234 // adp/4952 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
-    extract 48 1
-    btoi
-    assert
-    // ^ Claim: has voted already
-    // at ./index.rsh:230:14:application
-    // at ./index.rsh:345:33:application call to "doGovernor_unvote" (defined at: ./index.rsh:226:42:function exp)
-    // at ./index.rsh:345:13:application call to [unknown function] (defined at: ./index.rsh:345:13:function exp)
+    // ^ Claim: b voteEnd
+    // at ./index.rsh:222:16:application
+    // at ./index.rsh:220:44:application call to [unknown function] (defined at: ./index.rsh:220:44:function exp)
     txn Sender
     byte base64(AA==)
     byte base64(AQ==)
-    load 234 // adp/4952 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    load 235 // adp/6187 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     extract 0 32
-    load 233 // stakeN/4953 :: UInt
+    load 234 // stakeN/6473 :: UInt
     itob
     concat
-    load 232 // stakeT/4954 :: UInt
+    load 233 // stakeT/6474 :: UInt
     itob
     concat
-    byte base64(AA==)
+    byte base64(AQ==)
     concat
     concat
     app_local_put
     byte base64(YXBwSUQ=)
-    load 251 // voteManager/2285 :: Contract
+    load 251 // voteManager/3419 :: Contract
     itob
     concat
     sha512_256
-    store 230 // remote address
+    store 231 // remote address
     // resource: R_Account
     global CurrentApplicationAddress
-    balance
-    global CurrentApplicationAddress
     min_balance
+    store 230 // minb
+    global CurrentApplicationAddress
+    balance
+    load 230 // minb
     -
     itob
     store 229 // pre balances
@@ -988,7 +753,194 @@ assert
     itxn_field Fee
     int appl
     itxn_field TypeEnum
-    load 251 // voteManager/2285 :: Contract
+    load 251 // voteManager/3419 :: Contract
+    // resource: R_App
+    itxn_field ApplicationID
+    byte base64(SHlLRg==)
+    itxn_field ApplicationArgs
+    txn Sender
+    itxn_field Accounts
+    byte base64(AAAAAAAAAAE=)
+    itxn_field ApplicationArgs
+    load 234 // stakeN/6473 :: UInt
+    load 233 // stakeT/6474 :: UInt
+    +
+    itob
+    itxn_field ApplicationArgs
+    load 236 // data_id/6113 :: Tuple(Array(Array(UInt, 4), 4))
+    itxn_field ApplicationArgs
+    itxn_submit
+    // ^ Remote: Staking_vote(account,uint64,uint64[4][4])uint64[4][4]
+    // at ./index.rsh:226:11:application
+    // at ./index.rsh:220:44:application call to [unknown function] (defined at: ./index.rsh:220:44:function exp)
+    global CurrentApplicationAddress
+    balance
+    load 230 // minb
+    -
+    load 229 // pre balances
+    btoi
+    -
+    itob
+    gitxn 0 LastLog
+    extract 4 0
+    concat
+    store 232 // v6525 :: Tuple(UInt, Array(Array(UInt, 4), 4))
+    byte base64(AAAAAAAAGX0=)
+    load 232 // v6525 :: Tuple(UInt, Array(Array(UInt, 4), 4))
+    concat
+    log // up to 144 bytes
+    load 232 // v6525 :: Tuple(UInt, Array(Array(UInt, 4), 4))
+    dup
+    store 231 // v6526 :: Tuple(UInt, Array(Array(UInt, 4), 4))
+    extract 8 128
+    store 230 // v6529 :: Array(Array(UInt, 4), 4)
+    int 0
+    load 231 // v6526 :: Tuple(UInt, Array(Array(UInt, 4), 4))
+    int 0
+    extract_uint64
+    ==
+    assert
+    // ^ Claim: remote bill check
+    // at ./index.rsh:226:11:application
+    // at ./index.rsh:220:44:application call to [unknown function] (defined at: ./index.rsh:220:44:function exp)
+    byte base64(AAAAAAAAGYE=)
+    load 230 // v6529 :: Array(Array(UInt, 4), 4)
+    concat
+    log // up to 136 bytes
+    load 230 // v6529 :: Array(Array(UInt, 4), 4)
+    store 7 // GV_apiRet :: Null
+    byte base64(Ly79lg==)
+    txn Sender
+    concat
+    load 230 // v6529 :: Array(Array(UInt, 4), 4)
+    concat
+    log // up to 164 bytes
+    load 255 // Deployer/3397 :: Address
+    load 254 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+    load 253 // stakeToken/3399 :: Token
+    load 252 // v3409 :: UInt
+    load 251 // voteManager/3419 :: Contract
+    load 250 // deadline1_signupEnd/3421 :: UInt
+    load 249 // deadline2_voteStart/3422 :: UInt
+    load 248 // deadline3_voteEnd/3423 :: UInt
+    load 247 // deadline4_voteFinal/3424 :: UInt
+    load 246 // deadline5_rewardStart/3425 :: UInt
+    load 245 // deadline6_delete/3426 :: UInt
+    load 230 // v6529 :: Array(Array(UInt, 4), 4)
+    int 0
+    load 243 // remainingReward/3474 :: UInt
+    load 242 // remainingStakeN/3475 :: UInt
+    load 241 // remainingStakeT/3476 :: UInt
+    load 240 // rewardedStakeN/3477 :: UInt
+    load 234 // stakeN/6473 :: UInt
+    +
+    load 239 // rewardedStakeT/3478 :: UInt
+    load 233 // stakeT/6474 :: UInt
+    +
+    global Round
+    b loopBody1
+    // l23_Switch_Governor_vote0_544 }
+
+  l18_Switch_lt_4:
+  pop
+
+    // { l24_Switch_Governor_unvote0_544
+    l24_Switch_Governor_unvote0_544:
+    // CompanionLabel True "api_Governor_unvote"
+    api_Governor_unvote:
+    txn Sender
+    int 8
+    bzero
+    concat
+    int 8
+    bzero
+    concat
+    byte base64(AA==)
+    concat
+    txn Sender
+    callsub l11_LF_cMapLoad
+    dup
+    store 235 // fromSome object
+    extract 1 49
+    load 235 // fromSome object
+    int 0
+    getbyte
+    select
+    dup
+    store 236 // adp/5598 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    extract 48 1
+    btoi
+    assert
+    // ^ Claim: has voted already
+    // at reach standard library:57:5:application
+    // at ./index.rsh:241:12:application call to "check" (defined at: reach standard library:49:32:function exp)
+    // at ./index.rsh:238:33:application call to [unknown function] (defined at: ./index.rsh:238:33:function exp)
+    // at ./index.rsh:146:19:application call to [unknown function] (defined at: ./index.rsh:238:33:function exp)
+    // at ./index.rsh:146:19:application call to [unknown function] (defined at: ./index.rsh:146:19:function exp)
+    // at ./index.rsh:193:14:application call to [unknown function] (defined at: ./index.rsh:193:14:function exp)
+    // ^ CheckPay
+    // at ./index.rsh:146:19:dot
+    // ^ CheckPay
+    // at ./index.rsh:146:19:dot
+    load 236 // adp/5598 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    int 32
+    extract_uint64
+    store 235 // stakeN/5791 :: UInt
+    load 236 // adp/5598 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    int 40
+    extract_uint64
+    store 234 // stakeT/5792 :: UInt
+    load 249 // deadline2_voteStart/3422 :: UInt
+    global LatestTimestamp
+    <
+    assert
+    // ^ Claim: a voteStart
+    // at ./index.rsh:243:16:application
+    // at ./index.rsh:242:44:application call to [unknown function] (defined at: ./index.rsh:242:44:function exp)
+    global LatestTimestamp
+    load 247 // deadline4_voteFinal/3424 :: UInt
+    <
+    assert
+    // ^ Claim: b voteFinal
+    // at ./index.rsh:244:16:application
+    // at ./index.rsh:242:44:application call to [unknown function] (defined at: ./index.rsh:242:44:function exp)
+    txn Sender
+    byte base64(AA==)
+    byte base64(AQ==)
+    load 236 // adp/5598 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    extract 0 32
+    load 235 // stakeN/5791 :: UInt
+    itob
+    concat
+    load 234 // stakeT/5792 :: UInt
+    itob
+    concat
+    byte base64(AA==)
+    concat
+    concat
+    app_local_put
+    byte base64(YXBwSUQ=)
+    load 251 // voteManager/3419 :: Contract
+    itob
+    concat
+    sha512_256
+    store 232 // remote address
+    // resource: R_Account
+    global CurrentApplicationAddress
+    min_balance
+    store 231 // minb
+    global CurrentApplicationAddress
+    balance
+    load 231 // minb
+    -
+    itob
+    store 230 // pre balances
+    itxn_begin
+    int 0
+    itxn_field Fee
+    int appl
+    itxn_field TypeEnum
+    load 251 // voteManager/3419 :: Contract
     // resource: R_App
     itxn_field ApplicationID
     byte base64(OY7rqg==)
@@ -999,93 +951,91 @@ assert
     itxn_field ApplicationArgs
     itxn_submit
     // ^ Remote: Staking_withdraw(account)uint64[4][4]
-    // at ./index.rsh:235:13:application
-    // at ./index.rsh:345:46:application call to [unknown function] (defined at: ./index.rsh:231:20:function exp)
-    // at ./index.rsh:345:13:application call to [unknown function] (defined at: ./index.rsh:345:13:function exp)
+    // at ./index.rsh:248:11:application
+    // at ./index.rsh:242:44:application call to [unknown function] (defined at: ./index.rsh:242:44:function exp)
     global CurrentApplicationAddress
     balance
-    global CurrentApplicationAddress
-    min_balance
+    load 231 // minb
     -
-    load 229 // pre balances
+    load 230 // pre balances
     btoi
     -
     itob
     gitxn 0 LastLog
     extract 4 0
     concat
-    store 231 // v4978 :: Tuple(UInt, Array(Array(UInt, 4), 4))
-    byte base64(AAAAAAAAE3I=)
-    load 231 // v4978 :: Tuple(UInt, Array(Array(UInt, 4), 4))
+    store 233 // v5821 :: Tuple(UInt, Array(Array(UInt, 4), 4))
+    byte base64(AAAAAAAAFr0=)
+    load 233 // v5821 :: Tuple(UInt, Array(Array(UInt, 4), 4))
     concat
     log // up to 144 bytes
-    load 231 // v4978 :: Tuple(UInt, Array(Array(UInt, 4), 4))
+    load 233 // v5821 :: Tuple(UInt, Array(Array(UInt, 4), 4))
     dup
-    store 230 // v4979 :: Tuple(UInt, Array(Array(UInt, 4), 4))
+    store 232 // v5822 :: Tuple(UInt, Array(Array(UInt, 4), 4))
     extract 8 128
-    store 229 // v4982 :: Array(Array(UInt, 4), 4)
+    store 231 // v5825 :: Array(Array(UInt, 4), 4)
     int 0
-    load 230 // v4979 :: Tuple(UInt, Array(Array(UInt, 4), 4))
+    load 232 // v5822 :: Tuple(UInt, Array(Array(UInt, 4), 4))
     int 0
     extract_uint64
     ==
     assert
     // ^ Claim: remote bill check
-    // at ./index.rsh:235:13:application
-    // at ./index.rsh:345:46:application call to [unknown function] (defined at: ./index.rsh:231:20:function exp)
-    // at ./index.rsh:345:13:application call to [unknown function] (defined at: ./index.rsh:345:13:function exp)
-    byte base64(AAAAAAAAE3Y=)
-    load 229 // v4982 :: Array(Array(UInt, 4), 4)
+    // at ./index.rsh:248:11:application
+    // at ./index.rsh:242:44:application call to [unknown function] (defined at: ./index.rsh:242:44:function exp)
+    byte base64(AAAAAAAAFsE=)
+    load 231 // v5825 :: Array(Array(UInt, 4), 4)
     concat
     log // up to 136 bytes
-    load 229 // v4982 :: Array(Array(UInt, 4), 4)
+    load 231 // v5825 :: Array(Array(UInt, 4), 4)
     store 7 // GV_apiRet :: Null
     byte base64(1gI9Rg==)
     txn Sender
     concat
-    load 229 // v4982 :: Array(Array(UInt, 4), 4)
+    load 231 // v5825 :: Array(Array(UInt, 4), 4)
     concat
     log // up to 164 bytes
-    load 255 // Deployer/2263 :: Address
-    load 254 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
-    load 253 // stakeToken/2265 :: Token
-    load 252 // v2275 :: UInt
-    load 251 // voteManager/2285 :: Contract
-    load 250 // deadline1_signupEnd/2287 :: UInt
-    load 249 // deadline2_voteStart/2288 :: UInt
-    load 248 // deadline3_voteEnd/2289 :: UInt
-    load 247 // deadline4_voteFinal/2290 :: UInt
-    load 246 // deadline5_rewardStart/2291 :: UInt
-    load 245 // deadline6_delete/2292 :: UInt
-    load 229 // v4982 :: Array(Array(UInt, 4), 4)
+    load 255 // Deployer/3397 :: Address
+    load 254 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+    load 253 // stakeToken/3399 :: Token
+    load 252 // v3409 :: UInt
+    load 251 // voteManager/3419 :: Contract
+    load 250 // deadline1_signupEnd/3421 :: UInt
+    load 249 // deadline2_voteStart/3422 :: UInt
+    load 248 // deadline3_voteEnd/3423 :: UInt
+    load 247 // deadline4_voteFinal/3424 :: UInt
+    load 246 // deadline5_rewardStart/3425 :: UInt
+    load 245 // deadline6_delete/3426 :: UInt
+    load 231 // v5825 :: Array(Array(UInt, 4), 4)
     int 0
-    load 243 // pnow/2334 :: UInt
-    global LatestTimestamp
-    load 242 // remainingReward/2335 :: UInt
-    load 241 // remainingStakeN/2336 :: UInt
-    load 240 // remainingStakeT/2337 :: UInt
-    load 239 // rewardedStakeN/2338 :: UInt
-    load 233 // stakeN/4953 :: UInt
+    load 243 // remainingReward/3474 :: UInt
+    load 242 // remainingStakeN/3475 :: UInt
+    load 241 // remainingStakeT/3476 :: UInt
+    load 240 // rewardedStakeN/3477 :: UInt
+    load 235 // stakeN/5791 :: UInt
     -
-    load 238 // rewardedStakeT/2339 :: UInt
-    load 232 // stakeT/4954 :: UInt
+    load 239 // rewardedStakeT/3478 :: UInt
+    load 234 // stakeT/5792 :: UInt
     -
     global Round
-    global LatestTimestamp
     b loopBody1
-    // l29_Switch_Governor_unvote0_340 }
+    // l24_Switch_Governor_unvote0_544 }
 
-  l28_Switch_lt_4:
+  l17_Switch_lt_3:
+  dup
+  int 1
+  <
+  bnz l25_Switch_lt_1
+  dup
+  int 2
+  <
+  bnz l26_Switch_lt_2
   pop
 
-    // { l30_Switch_Governor_unstake0_340
-    l30_Switch_Governor_unstake0_340:
+    // { l27_Switch_Governor_unstake0_544
+    l27_Switch_Governor_unstake0_544:
     // CompanionLabel True "api_Governor_unstake"
     api_Governor_unstake:
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
     txn Sender
     int 8
     bzero
@@ -1096,68 +1046,72 @@ assert
     byte base64(AA==)
     concat
     txn Sender
-    callsub l13_LF_cMapLoad
+    callsub l11_LF_cMapLoad
     dup
-    store 233 // fromSome object
+    store 235 // fromSome object
     extract 1 49
-    load 233 // fromSome object
+    load 235 // fromSome object
     int 0
     getbyte
     select
     dup
-    store 234 // adp/4382 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 236 // adp/5010 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     int 32
     extract_uint64
-    store 233 // stakeN/4383 :: UInt
-    load 234 // adp/4382 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 235 // stakeN/5011 :: UInt
+    load 236 // adp/5010 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     int 40
     extract_uint64
-    store 232 // stakeT/4384 :: UInt
-    load 234 // adp/4382 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 234 // stakeT/5012 :: UInt
+    // ^ CheckPay
+    // at ./index.rsh:146:19:dot
+    // ^ CheckPay
+    // at ./index.rsh:146:19:dot
+    load 236 // adp/5010 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     extract 0 32
-    store 231 // bene/4386 :: Address
-    load 234 // adp/4382 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
+    store 233 // bene/5174 :: Address
+    load 236 // adp/5010 :: Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})
     extract 48 1
     btoi
+    store 232 // x/5177 :: Bool
+    load 246 // deadline5_rewardStart/3425 :: UInt
+    global LatestTimestamp
+    <
     dup
-    store 230 // voted/4389 :: Bool
-    bz l31_localIfF
-    load 236 // rewardsStarted/2418 :: Bool
-    assert
-    // ^ Claim: a rewardStart
-    // at ./index.rsh:252:16:application
-    // at ./index.rsh:278:25:application call to "doUnstake" (defined at: ./index.rsh:248:34:function exp)
-    // at ./index.rsh:349:34:application call to "doGovernor_unstake" (defined at: ./index.rsh:277:43:function exp)
-    // at ./index.rsh:349:13:application call to [unknown function] (defined at: ./index.rsh:349:13:function exp)
-    b l32_localIfK
-    l31_localIfF:
-    l32_localIfK:
-    load 236 // rewardsStarted/2418 :: Bool
-    load 230 // voted/4389 :: Bool
+    store 231 // y/5181 :: Bool
+    load 232 // x/5177 :: Bool
     &&
-    bz l33_localIfF
-    load 252 // v2275 :: UInt
-    load 233 // stakeN/4383 :: UInt
-    load 232 // stakeT/4384 :: UInt
+    bz l28_localIfF
+    load 252 // v3409 :: UInt
+    load 235 // stakeN/5011 :: UInt
+    load 234 // stakeT/5012 :: UInt
     +
     mulw
-    load 237 // rewardedStake/2414 :: UInt
+    load 238 // rewardedStake/3539 :: UInt
     divw
-    store 229 // reward/4393 :: UInt
-    b l34_localIfK
-    l33_localIfF:
+    store 230 // reward/5183 :: UInt
+    b l29_localIfK
+    l28_localIfF:
     int 0
-    store 229 // reward/4393 :: UInt
-    l34_localIfK:
-    load 229 // reward/4393 :: UInt
-    load 242 // remainingReward/2335 :: UInt
+    store 230 // reward/5183 :: UInt
+    l29_localIfK:
+    load 230 // reward/5183 :: UInt
+    load 243 // remainingReward/3474 :: UInt
     <=
     assert
     // ^ Claim: reward is portion of reward
-    // at ./index.rsh:257:39:application
-    // at ./index.rsh:278:25:application call to "doUnstake" (defined at: ./index.rsh:248:34:function exp)
-    // at ./index.rsh:349:34:application call to "doGovernor_unstake" (defined at: ./index.rsh:277:43:function exp)
-    // at ./index.rsh:349:13:application call to [unknown function] (defined at: ./index.rsh:349:13:function exp)
+    // at ./index.rsh:268:43:application
+    // at ./index.rsh:291:23:application call to "doAfter" (defined at: ./index.rsh:264:44:function exp)
+    // at ./index.rsh:290:25:application call to [unknown function] (defined at: ./index.rsh:290:25:function exp)
+    load 232 // x/5177 :: Bool
+    !
+    load 231 // y/5181 :: Bool
+    ||
+    assert
+    // ^ Claim: a rewardStart
+    // at ./index.rsh:269:18:application
+    // at ./index.rsh:291:23:application call to "doAfter" (defined at: ./index.rsh:264:44:function exp)
+    // at ./index.rsh:290:25:application call to [unknown function] (defined at: ./index.rsh:290:25:function exp)
     txn Sender
     byte base64(AA==)
     int 50
@@ -1168,7 +1122,7 @@ assert
       itxn_begin
       int 0
       itxn_field Fee
-      load 233 // stakeN/4383 :: UInt
+      load 235 // stakeN/5011 :: UInt
       itxn_field Amount
       int pay
       itxn_field TypeEnum
@@ -1182,14 +1136,14 @@ assert
       itxn_begin
       int 0
       itxn_field Fee
-      load 232 // stakeT/4384 :: UInt
+      load 234 // stakeT/5012 :: UInt
       itxn_field AssetAmount
       int axfer
       itxn_field TypeEnum
       txn Sender
       itxn_field AssetReceiver
       // resource: R_Asset
-      load 253 // stakeToken/2265 :: Token
+      load 253 // stakeToken/3399 :: Token
       itxn_field XferAsset
       itxn_submit
       // makeTxn }
@@ -1199,316 +1153,276 @@ assert
       itxn_begin
       int 0
       itxn_field Fee
-      load 229 // reward/4393 :: UInt
+      load 230 // reward/5183 :: UInt
       itxn_field Amount
       int pay
       itxn_field TypeEnum
       // resource: R_Account
-      load 231 // bene/4386 :: Address
+      load 233 // bene/5174 :: Address
       itxn_field Receiver
       itxn_submit
       // makeTxn }
 
-    byte base64(AAAAAAAAESk=)
-    load 229 // reward/4393 :: UInt
+    byte base64(AAAAAAAAFD8=)
+    load 230 // reward/5183 :: UInt
     itob
     concat
     log // up to 16 bytes
-    load 229 // reward/4393 :: UInt
+    load 230 // reward/5183 :: UInt
     itob
     store 7 // GV_apiRet :: Null
     byte base64(H+fCyQ==)
     txn Sender
     concat
-    load 231 // bene/4386 :: Address
+    load 233 // bene/5174 :: Address
     concat
-    load 233 // stakeN/4383 :: UInt
+    load 235 // stakeN/5011 :: UInt
     itob
     concat
-    load 232 // stakeT/4384 :: UInt
+    load 234 // stakeT/5012 :: UInt
     itob
     concat
-    load 229 // reward/4393 :: UInt
+    load 230 // reward/5183 :: UInt
     itob
     concat
     log // up to 92 bytes
-    load 255 // Deployer/2263 :: Address
-    load 254 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
-    load 253 // stakeToken/2265 :: Token
-    load 252 // v2275 :: UInt
-    load 251 // voteManager/2285 :: Contract
-    load 250 // deadline1_signupEnd/2287 :: UInt
-    load 249 // deadline2_voteStart/2288 :: UInt
-    load 248 // deadline3_voteEnd/2289 :: UInt
-    load 247 // deadline4_voteFinal/2290 :: UInt
-    load 246 // deadline5_rewardStart/2291 :: UInt
-    load 245 // deadline6_delete/2292 :: UInt
-    load 244 // currentVote/2331 :: Array(Array(UInt, 4), 4)
+    load 255 // Deployer/3397 :: Address
+    load 254 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+    load 253 // stakeToken/3399 :: Token
+    load 252 // v3409 :: UInt
+    load 251 // voteManager/3419 :: Contract
+    load 250 // deadline1_signupEnd/3421 :: UInt
+    load 249 // deadline2_voteStart/3422 :: UInt
+    load 248 // deadline3_voteEnd/3423 :: UInt
+    load 247 // deadline4_voteFinal/3424 :: UInt
+    load 246 // deadline5_rewardStart/3425 :: UInt
+    load 245 // deadline6_delete/3426 :: UInt
+    load 244 // currentVote/3472 :: Array(Array(UInt, 4), 4)
     int 0
-    load 243 // pnow/2334 :: UInt
-    global LatestTimestamp
-    load 242 // remainingReward/2335 :: UInt
-    load 229 // reward/4393 :: UInt
+    load 243 // remainingReward/3474 :: UInt
+    load 230 // reward/5183 :: UInt
     -
-    load 241 // remainingStakeN/2336 :: UInt
-    load 233 // stakeN/4383 :: UInt
+    load 242 // remainingStakeN/3475 :: UInt
+    load 235 // stakeN/5011 :: UInt
     -
-    load 240 // remainingStakeT/2337 :: UInt
-    load 232 // stakeT/4384 :: UInt
+    load 241 // remainingStakeT/3476 :: UInt
+    load 234 // stakeT/5012 :: UInt
     -
-    load 239 // rewardedStakeN/2338 :: UInt
-    load 238 // rewardedStakeT/2339 :: UInt
+    load 240 // rewardedStakeN/3477 :: UInt
+    load 239 // rewardedStakeT/3478 :: UInt
     global Round
-    global LatestTimestamp
     b loopBody1
-    // l30_Switch_Governor_unstake0_340 }
+    // l27_Switch_Governor_unstake0_544 }
 
-  l19_Switch_lt_3:
-  dup
-  int 1
-  <
-  bnz l35_Switch_lt_1
-  dup
-  int 2
-  <
-  bnz l36_Switch_lt_2
+  l26_Switch_lt_2:
   pop
 
-    // { l37_Switch_Governor_stake0_340
-    l37_Switch_Governor_stake0_340:
-    load 235 // .fork340.msg/2680 :: Data({"Admin_delete0_340": Tuple(), "Admin_nop0_340": Tuple(), "Governor_stake0_340": Tuple(UInt, UInt, Address), "Governor_unstake0_340": Tuple(), "Governor_unvote0_340": Tuple(), "Governor_vote0_340": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_340": Tuple(Address)})
+    // { l30_Switch_Governor_stake0_544
+    l30_Switch_Governor_stake0_544:
+    load 237 // .fork544.msg/3838 :: Data({"Admin_delete0_544": Tuple(), "Governor_stake0_544": Tuple(UInt, UInt, Address), "Governor_unstake0_544": Tuple(), "Governor_unvote0_544": Tuple(), "Governor_vote0_544": Tuple(Array(Array(UInt, 4), 4)), "Other_claimFor0_544": Tuple(Address)})
     extract 1 48
-    store 234 // data_id/3717 :: Tuple(UInt, UInt, Address)
+    store 236 // data_id/4409 :: Tuple(UInt, UInt, Address)
     // CompanionLabel True "api_Governor_stake"
     api_Governor_stake:
-    load 234 // data_id/3717 :: Tuple(UInt, UInt, Address)
+    load 236 // data_id/4409 :: Tuple(UInt, UInt, Address)
     int 0
     extract_uint64
-    store 233 // stakeN/3736 :: UInt
-    load 234 // data_id/3717 :: Tuple(UInt, UInt, Address)
+    store 235 // stakeN/4421 :: UInt
+    load 236 // data_id/4409 :: Tuple(UInt, UInt, Address)
     int 8
     extract_uint64
-    store 232 // stakeT/3737 :: UInt
-
-      // { checkTxn
-      load 233 // stakeN/3736 :: UInt
-      callsub l38_LF_checkTxn_net
-      // checkTxn }
-
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-
-      // { checkTxn
-      load 232 // stakeT/3737 :: UInt
-      load 253 // stakeToken/2265 :: Token
-      callsub l39_LF_checkTxn_tok
-      // checkTxn }
-
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    load 234 // data_id/3717 :: Tuple(UInt, UInt, Address)
-    extract 16 32
-    store 231 // bene/3837 :: Address
-    global LatestTimestamp
-    load 250 // deadline1_signupEnd/2287 :: UInt
-    <
-    assert
-    // ^ Claim: b signupEnd
-    // at ./index.rsh:183:14:application
-    // at ./index.rsh:337:54:application call to "doGovernor_stake" (defined at: ./index.rsh:182:63:function exp)
-    // at ./index.rsh:337:35:application call to [unknown function] (defined at: ./index.rsh:337:35:function exp)
+    store 234 // stakeT/4422 :: UInt
     txn Sender
-    callsub l13_LF_cMapLoad
+    callsub l11_LF_cMapLoad
     dup
-    store 229 // v/3840 :: Data({"None": Null, "Some": Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})}) for switch
+    store 233 // v/4424 :: Data({"None": Null, "Some": Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})})
     int 0
     getbyte
-    bnz l41_LocalSwitch_nz
+    bnz l32_LocalSwitch_nz
 
-      // { l42_LocalSwitch_None
-      l42_LocalSwitch_None:
+      // { l33_LocalSwitch_None
+      l33_LocalSwitch_None:
       int 1
-      store 230 // v3841 :: Bool
-      b l40_LocalSwitchK
-      // l42_LocalSwitch_None }
+      store 232 // v4425 :: Bool
+      b l31_LocalSwitchK
+      // l33_LocalSwitch_None }
 
-    l41_LocalSwitch_nz:
+    l32_LocalSwitch_nz:
 
-      // { l43_LocalSwitch_Some
-      l43_LocalSwitch_Some:
+      // { l34_LocalSwitch_Some
+      l34_LocalSwitch_Some:
       int 0
-      store 230 // v3841 :: Bool
-      b l40_LocalSwitchK
-      // l43_LocalSwitch_Some }
+      store 232 // v4425 :: Bool
+      b l31_LocalSwitchK
+      // l34_LocalSwitch_Some }
 
-    l40_LocalSwitchK:
-    load 230 // v3841 :: Bool
+    l31_LocalSwitchK:
+    load 232 // v4425 :: Bool
     assert
     // ^ Claim: unstaked
-    // at ./index.rsh:184:14:application
-    // at ./index.rsh:337:54:application call to "doGovernor_stake" (defined at: ./index.rsh:182:63:function exp)
-    // at ./index.rsh:337:35:application call to [unknown function] (defined at: ./index.rsh:337:35:function exp)
-    load 233 // stakeN/3736 :: UInt
-    load 232 // stakeT/3737 :: UInt
+    // at reach standard library:57:5:application
+    // at ./index.rsh:196:12:application call to "check" (defined at: reach standard library:49:32:function exp)
+    // at ./index.rsh:194:52:application call to [unknown function] (defined at: ./index.rsh:194:52:function exp)
+    // at ./index.rsh:146:19:application call to [unknown function] (defined at: ./index.rsh:194:52:function exp)
+    // at ./index.rsh:146:19:application call to [unknown function] (defined at: ./index.rsh:146:19:function exp)
+    // at ./index.rsh:193:14:application call to [unknown function] (defined at: ./index.rsh:193:14:function exp)
+    load 235 // stakeN/4421 :: UInt
+    load 234 // stakeT/4422 :: UInt
     +
     int 0
     >
     assert
     // ^ Claim: positive stake
-    // at ./index.rsh:189:14:application
-    // at ./index.rsh:337:54:application call to "doGovernor_stake" (defined at: ./index.rsh:182:63:function exp)
-    // at ./index.rsh:337:35:application call to [unknown function] (defined at: ./index.rsh:337:35:function exp)
+    // at reach standard library:57:5:application
+    // at ./index.rsh:201:12:application call to "check" (defined at: reach standard library:49:32:function exp)
+    // at ./index.rsh:194:52:application call to [unknown function] (defined at: ./index.rsh:194:52:function exp)
+    // at ./index.rsh:146:19:application call to [unknown function] (defined at: ./index.rsh:194:52:function exp)
+    // at ./index.rsh:146:19:application call to [unknown function] (defined at: ./index.rsh:146:19:function exp)
+    // at ./index.rsh:193:14:application call to [unknown function] (defined at: ./index.rsh:193:14:function exp)
+
+      // { checkTxn
+      load 235 // stakeN/4421 :: UInt
+      callsub l35_LF_checkTxn_net
+      // checkTxn }
+
+    // ^ CheckPay
+    // at ./index.rsh:146:19:dot
+
+      // { checkTxn
+      load 234 // stakeT/4422 :: UInt
+      load 253 // stakeToken/3399 :: Token
+      callsub l36_LF_checkTxn_tok
+      // checkTxn }
+
+    // ^ CheckPay
+    // at ./index.rsh:146:19:dot
+    load 236 // data_id/4409 :: Tuple(UInt, UInt, Address)
+    extract 16 32
+    store 231 // bene/4571 :: Address
+    load 233 // v/4424 :: Data({"None": Null, "Some": Object({"bene": Address, "stakeN": UInt, "stakeT": UInt, "voted": Bool})})
+    int 0
+    getbyte
+    bnz l38_LocalSwitch_nz
+
+      // { l39_LocalSwitch_None
+      l39_LocalSwitch_None:
+      int 1
+      store 230 // v4573 :: Bool
+      b l37_LocalSwitchK
+      // l39_LocalSwitch_None }
+
+    l38_LocalSwitch_nz:
+
+      // { l40_LocalSwitch_Some
+      l40_LocalSwitch_Some:
+      int 0
+      store 230 // v4573 :: Bool
+      b l37_LocalSwitchK
+      // l40_LocalSwitch_Some }
+
+    l37_LocalSwitchK:
+    load 230 // v4573 :: Bool
+    assert
+    // ^ Claim: unstaked
+    // at reach standard library:57:5:application
+    // at ./index.rsh:196:12:application call to "check" (defined at: reach standard library:49:32:function exp)
+    // at ./index.rsh:202:55:application call to [unknown function] (defined at: ./index.rsh:202:55:function exp)
+    global LatestTimestamp
+    load 250 // deadline1_signupEnd/3421 :: UInt
+    <
+    assert
+    // ^ Claim: b signupEnd
+    // at ./index.rsh:203:16:application
+    // at ./index.rsh:202:55:application call to [unknown function] (defined at: ./index.rsh:202:55:function exp)
     txn Sender
     byte base64(AA==)
     byte base64(AQ==)
-    load 231 // bene/3837 :: Address
-    load 233 // stakeN/3736 :: UInt
+    load 231 // bene/4571 :: Address
+    load 235 // stakeN/4421 :: UInt
     itob
     concat
-    load 232 // stakeT/3737 :: UInt
+    load 234 // stakeT/4422 :: UInt
     itob
     concat
     byte base64(AA==)
     concat
     concat
     app_local_put
-    byte base64(AAAAAAAADwcB)
+    byte base64(AAAAAAAAEeoB)
     log // up to 9 bytes
     byte base64(AQ==)
     store 7 // GV_apiRet :: Null
     byte base64(WdHIQQ==)
     txn Sender
     concat
-    load 233 // stakeN/3736 :: UInt
+    load 235 // stakeN/4421 :: UInt
     itob
     concat
-    load 232 // stakeT/3737 :: UInt
+    load 234 // stakeT/4422 :: UInt
     itob
     concat
-    load 231 // bene/3837 :: Address
+    load 231 // bene/4571 :: Address
     concat
     log // up to 84 bytes
-    load 255 // Deployer/2263 :: Address
-    load 254 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
-    load 253 // stakeToken/2265 :: Token
-    load 252 // v2275 :: UInt
-    load 251 // voteManager/2285 :: Contract
-    load 250 // deadline1_signupEnd/2287 :: UInt
-    load 249 // deadline2_voteStart/2288 :: UInt
-    load 248 // deadline3_voteEnd/2289 :: UInt
-    load 247 // deadline4_voteFinal/2290 :: UInt
-    load 246 // deadline5_rewardStart/2291 :: UInt
-    load 245 // deadline6_delete/2292 :: UInt
-    load 244 // currentVote/2331 :: Array(Array(UInt, 4), 4)
+    load 255 // Deployer/3397 :: Address
+    load 254 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+    load 253 // stakeToken/3399 :: Token
+    load 252 // v3409 :: UInt
+    load 251 // voteManager/3419 :: Contract
+    load 250 // deadline1_signupEnd/3421 :: UInt
+    load 249 // deadline2_voteStart/3422 :: UInt
+    load 248 // deadline3_voteEnd/3423 :: UInt
+    load 247 // deadline4_voteFinal/3424 :: UInt
+    load 246 // deadline5_rewardStart/3425 :: UInt
+    load 245 // deadline6_delete/3426 :: UInt
+    load 244 // currentVote/3472 :: Array(Array(UInt, 4), 4)
     int 0
-    load 243 // pnow/2334 :: UInt
-    global LatestTimestamp
-    load 242 // remainingReward/2335 :: UInt
-    load 241 // remainingStakeN/2336 :: UInt
-    load 233 // stakeN/3736 :: UInt
+    load 243 // remainingReward/3474 :: UInt
+    load 242 // remainingStakeN/3475 :: UInt
+    load 235 // stakeN/4421 :: UInt
     +
-    load 240 // remainingStakeT/2337 :: UInt
-    load 232 // stakeT/3737 :: UInt
+    load 241 // remainingStakeT/3476 :: UInt
+    load 234 // stakeT/4422 :: UInt
     +
-    load 239 // rewardedStakeN/2338 :: UInt
-    load 238 // rewardedStakeT/2339 :: UInt
+    load 240 // rewardedStakeN/3477 :: UInt
+    load 239 // rewardedStakeT/3478 :: UInt
     global Round
-    global LatestTimestamp
     b loopBody1
-    // l37_Switch_Governor_stake0_340 }
+    // l30_Switch_Governor_stake0_544 }
 
-  l36_Switch_lt_2:
+  l25_Switch_lt_1:
   pop
 
-    // { l44_Switch_Admin_nop0_340
-    l44_Switch_Admin_nop0_340:
-    // CompanionLabel True "api_Admin_nop"
-    api_Admin_nop:
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    load 3 // GV_svs :: Null
-    int 417
-    extract_uint64
-    load 243 // pnow/2334 :: UInt
-    <=
-    assert
-    // ^ Claim
-    // at ./index.rsh:305:14:application
-    // at ./index.rsh:361:27:application call to "doAdmin_nop" (defined at: ./index.rsh:303:36:function exp)
-    // at ./index.rsh:361:13:application call to [unknown function] (defined at: ./index.rsh:361:13:function exp)
-    byte base64(AAAAAAAADO0=)
-    global LatestTimestamp
-    itob
-    concat
-    log // up to 16 bytes
-    global LatestTimestamp
-    itob
-    store 7 // GV_apiRet :: Null
-    load 255 // Deployer/2263 :: Address
-    load 254 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
-    load 253 // stakeToken/2265 :: Token
-    load 252 // v2275 :: UInt
-    load 251 // voteManager/2285 :: Contract
-    load 250 // deadline1_signupEnd/2287 :: UInt
-    load 249 // deadline2_voteStart/2288 :: UInt
-    load 248 // deadline3_voteEnd/2289 :: UInt
-    load 247 // deadline4_voteFinal/2290 :: UInt
-    load 246 // deadline5_rewardStart/2291 :: UInt
-    load 245 // deadline6_delete/2292 :: UInt
-    load 244 // currentVote/2331 :: Array(Array(UInt, 4), 4)
-    load 3 // GV_svs :: Null
-    int 416
-    int 1
-    extract3
-    btoi
-    load 243 // pnow/2334 :: UInt
-    global LatestTimestamp
-    load 242 // remainingReward/2335 :: UInt
-    load 241 // remainingStakeN/2336 :: UInt
-    load 240 // remainingStakeT/2337 :: UInt
-    load 239 // rewardedStakeN/2338 :: UInt
-    load 238 // rewardedStakeT/2339 :: UInt
-    global Round
-    global LatestTimestamp
-    b loopBody1
-    // l44_Switch_Admin_nop0_340 }
-
-  l35_Switch_lt_1:
-  pop
-
-    // { l45_Switch_Admin_delete0_340
-    l45_Switch_Admin_delete0_340:
+    // { l41_Switch_Admin_delete0_544
+    l41_Switch_Admin_delete0_544:
     // CompanionLabel True "api_Admin_delete"
     api_Admin_delete:
     // ^ CheckPay
-    // at ./index.rsh:148:19:dot
+    // at ./index.rsh:146:19:dot
     // ^ CheckPay
-    // at ./index.rsh:148:19:dot
-    load 245 // deadline6_delete/2292 :: UInt
+    // at ./index.rsh:146:19:dot
+    load 245 // deadline6_delete/3426 :: UInt
     global LatestTimestamp
     <
     assert
     // ^ Claim: a delete
-    // at ./index.rsh:287:14:application
-    // at ./index.rsh:357:30:application call to "doAdmin_delete" (defined at: ./index.rsh:285:39:function exp)
-    // at ./index.rsh:357:13:application call to [unknown function] (defined at: ./index.rsh:357:13:function exp)
-    load 241 // remainingStakeN/2336 :: UInt
-    load 242 // remainingReward/2335 :: UInt
+    // at ./index.rsh:305:16:application
+    // at ./index.rsh:304:44:application call to [unknown function] (defined at: ./index.rsh:304:44:function exp)
+    load 242 // remainingStakeN/3475 :: UInt
+    load 243 // remainingReward/3474 :: UInt
     +
-    store 234 // rN/2762 :: UInt
+    store 236 // rN/3974 :: UInt
 
       // { makeTxn
       itxn_begin
       int 0
       itxn_field Fee
-      load 234 // rN/2762 :: UInt
+      load 236 // rN/3974 :: UInt
       itxn_field Amount
       int pay
       itxn_field TypeEnum
       // resource: R_Account
-      load 255 // Deployer/2263 :: Address
+      load 255 // Deployer/3397 :: Address
       itxn_field Receiver
       itxn_submit
       // makeTxn }
@@ -1518,62 +1432,59 @@ assert
       itxn_begin
       int 0
       itxn_field Fee
-      load 240 // remainingStakeT/2337 :: UInt
+      load 241 // remainingStakeT/3476 :: UInt
       itxn_field AssetAmount
       int axfer
       itxn_field TypeEnum
-      load 255 // Deployer/2263 :: Address
+      load 255 // Deployer/3397 :: Address
       itxn_field AssetReceiver
       // resource: R_Asset
-      load 253 // stakeToken/2265 :: Token
+      load 253 // stakeToken/3399 :: Token
       itxn_field XferAsset
       itxn_submit
       // makeTxn }
 
-    byte base64(AAAAAAAACts=)
-    load 234 // rN/2762 :: UInt
+    byte base64(AAAAAAAAD5c=)
+    load 236 // rN/3974 :: UInt
     itob
-    load 240 // remainingStakeT/2337 :: UInt
+    load 241 // remainingStakeT/3476 :: UInt
     itob
     concat
     concat
     log // up to 24 bytes
-    load 234 // rN/2762 :: UInt
+    load 236 // rN/3974 :: UInt
     itob
-    load 240 // remainingStakeT/2337 :: UInt
+    load 241 // remainingStakeT/3476 :: UInt
     itob
     concat
     store 7 // GV_apiRet :: Null
     byte base64(o7ziEw==)
     log // up to 4 bytes
-    load 255 // Deployer/2263 :: Address
-    load 254 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
-    load 253 // stakeToken/2265 :: Token
-    load 252 // v2275 :: UInt
-    load 251 // voteManager/2285 :: Contract
-    load 250 // deadline1_signupEnd/2287 :: UInt
-    load 249 // deadline2_voteStart/2288 :: UInt
-    load 248 // deadline3_voteEnd/2289 :: UInt
-    load 247 // deadline4_voteFinal/2290 :: UInt
-    load 246 // deadline5_rewardStart/2291 :: UInt
-    load 245 // deadline6_delete/2292 :: UInt
-    load 244 // currentVote/2331 :: Array(Array(UInt, 4), 4)
+    load 255 // Deployer/3397 :: Address
+    load 254 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+    load 253 // stakeToken/3399 :: Token
+    load 252 // v3409 :: UInt
+    load 251 // voteManager/3419 :: Contract
+    load 250 // deadline1_signupEnd/3421 :: UInt
+    load 249 // deadline2_voteStart/3422 :: UInt
+    load 248 // deadline3_voteEnd/3423 :: UInt
+    load 247 // deadline4_voteFinal/3424 :: UInt
+    load 246 // deadline5_rewardStart/3425 :: UInt
+    load 245 // deadline6_delete/3426 :: UInt
+    load 244 // currentVote/3472 :: Array(Array(UInt, 4), 4)
     int 1
-    load 243 // pnow/2334 :: UInt
-    global LatestTimestamp
     int 0
     int 0
     int 0
-    load 239 // rewardedStakeN/2338 :: UInt
-    load 238 // rewardedStakeT/2339 :: UInt
+    load 240 // rewardedStakeN/3477 :: UInt
+    load 239 // rewardedStakeT/3478 :: UInt
     global Round
-    global LatestTimestamp
     b loopBody1
-    // l45_Switch_Admin_delete0_340 }
+    // l41_Switch_Admin_delete0_544 }
 
   // publish2 }
 
-l18_publish_lt_2:
+l16_publish_lt_2:
 int 0
 ==
 assert
@@ -1584,11 +1495,11 @@ assert
 
     // { checkTxn
     int 100000
-    callsub l38_LF_checkTxn_net
+    callsub l35_LF_checkTxn_net
     // checkTxn }
 
   // ^ CheckPay
-  // at ./index.rsh:115:12:dot
+  // at ./index.rsh:114:12:dot
   // CompanionLabel False "publish0"
   // check step
   int 0
@@ -1609,14 +1520,14 @@ assert
   store 5 // GV_argMsg :: Null
   dup
   extract 0 184
-  store 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  store 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   int 184
   extract_uint64
-  store 254 // stakeToken/2265 :: Token
+  store 254 // stakeToken/3399 :: Token
   byte base64(1WI0VQ==)
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   concat
-  load 254 // stakeToken/2265 :: Token
+  load 254 // stakeToken/3399 :: Token
   itob
   concat
   log // up to 196 bytes
@@ -1625,7 +1536,7 @@ assert
 
       // { checkTxn
       int 100000
-      callsub l38_LF_checkTxn_net
+      callsub l35_LF_checkTxn_net
       // checkTxn }
 
 
@@ -1640,179 +1551,181 @@ assert
       global CurrentApplicationAddress
       itxn_field AssetReceiver
       // resource: R_Asset
-      load 254 // stakeToken/2265 :: Token
+      load 254 // stakeToken/3399 :: Token
       itxn_field XferAsset
       itxn_submit
       // makeTxn }
 
     // TokenInit }
 
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   int 176
   extract_uint64
-  store 253 // v2275 :: UInt
+  store 253 // v3409 :: UInt
 
     // { checkTxn
-    load 253 // v2275 :: UInt
-    callsub l38_LF_checkTxn_net
+    load 253 // v3409 :: UInt
+    callsub l35_LF_checkTxn_net
     // checkTxn }
 
   // ^ CheckPay
-  // at ./index.rsh:115:12:dot
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  // at ./index.rsh:114:12:dot
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   int 48
   extract_uint64
-  store 252 // voteManager/2285 :: Contract
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  store 252 // voteManager/3419 :: Contract
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   int 128
   extract_uint64
-  store 251 // deadline1_signupEnd/2287 :: UInt
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  store 251 // deadline1_signupEnd/3421 :: UInt
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   int 136
   extract_uint64
-  store 250 // deadline2_voteStart/2288 :: UInt
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  store 250 // deadline2_voteStart/3422 :: UInt
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   int 144
   extract_uint64
-  store 249 // deadline3_voteEnd/2289 :: UInt
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  store 249 // deadline3_voteEnd/3423 :: UInt
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   int 152
   extract_uint64
-  store 248 // deadline4_voteFinal/2290 :: UInt
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  store 248 // deadline4_voteFinal/3424 :: UInt
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   int 160
   extract_uint64
-  store 247 // deadline5_rewardStart/2291 :: UInt
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  store 247 // deadline5_rewardStart/3425 :: UInt
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   int 168
   extract_uint64
-  store 246 // deadline6_delete/2292 :: UInt
+  store 246 // deadline6_delete/3426 :: UInt
   byte base64(YXBwSUQ=)
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   extract 8 8
   concat
   sha512_256
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   extract 16 32
   ==
   assert
   // ^ Claim: consManager
-  // at ./index.rsh:35:10:application
-  // at ./index.rsh:118:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
+  // at reach standard library:57:5:application
+  // at ./index.rsh:35:10:application call to "check" (defined at: reach standard library:49:32:function exp)
+  // at ./index.rsh:117:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
   byte base64(YXBwSUQ=)
-  load 252 // voteManager/2285 :: Contract
+  load 252 // voteManager/3419 :: Contract
   itob
   concat
   sha512_256
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   extract 56 32
   ==
   assert
   // ^ Claim: voteManager
-  // at ./index.rsh:36:10:application
-  // at ./index.rsh:118:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
-  load 253 // v2275 :: UInt
+  // at reach standard library:57:5:application
+  // at ./index.rsh:36:10:application call to "check" (defined at: reach standard library:49:32:function exp)
+  // at ./index.rsh:117:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
+  load 253 // v3409 :: UInt
   int 0
   >
   assert
   // ^ Claim: totalReward
-  // at ./index.rsh:37:10:application
-  // at ./index.rsh:118:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
-  load 251 // deadline1_signupEnd/2287 :: UInt
-  load 250 // deadline2_voteStart/2288 :: UInt
+  // at reach standard library:57:5:application
+  // at ./index.rsh:37:10:application call to "check" (defined at: reach standard library:49:32:function exp)
+  // at ./index.rsh:117:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
+  load 251 // deadline1_signupEnd/3421 :: UInt
+  load 250 // deadline2_voteStart/3422 :: UInt
   <
   assert
   // ^ Claim: voteStart
-  // at ./index.rsh:38:10:application
-  // at ./index.rsh:118:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
-  load 250 // deadline2_voteStart/2288 :: UInt
-  load 249 // deadline3_voteEnd/2289 :: UInt
+  // at reach standard library:57:5:application
+  // at ./index.rsh:38:10:application call to "check" (defined at: reach standard library:49:32:function exp)
+  // at ./index.rsh:117:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
+  load 250 // deadline2_voteStart/3422 :: UInt
+  load 249 // deadline3_voteEnd/3423 :: UInt
   <
   assert
   // ^ Claim: voteEnd
-  // at ./index.rsh:39:10:application
-  // at ./index.rsh:118:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
-  load 249 // deadline3_voteEnd/2289 :: UInt
-  load 248 // deadline4_voteFinal/2290 :: UInt
+  // at reach standard library:57:5:application
+  // at ./index.rsh:39:10:application call to "check" (defined at: reach standard library:49:32:function exp)
+  // at ./index.rsh:117:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
+  load 249 // deadline3_voteEnd/3423 :: UInt
+  load 248 // deadline4_voteFinal/3424 :: UInt
   <
   assert
   // ^ Claim: voteFinal
-  // at ./index.rsh:40:10:application
-  // at ./index.rsh:118:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
-  load 248 // deadline4_voteFinal/2290 :: UInt
-  load 247 // deadline5_rewardStart/2291 :: UInt
+  // at reach standard library:57:5:application
+  // at ./index.rsh:40:10:application call to "check" (defined at: reach standard library:49:32:function exp)
+  // at ./index.rsh:117:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
+  load 248 // deadline4_voteFinal/3424 :: UInt
+  load 247 // deadline5_rewardStart/3425 :: UInt
   <
   assert
   // ^ Claim: rewardStart
-  // at ./index.rsh:41:10:application
-  // at ./index.rsh:118:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
-  load 247 // deadline5_rewardStart/2291 :: UInt
-  load 246 // deadline6_delete/2292 :: UInt
+  // at reach standard library:57:5:application
+  // at ./index.rsh:41:10:application call to "check" (defined at: reach standard library:49:32:function exp)
+  // at ./index.rsh:117:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
+  load 247 // deadline5_rewardStart/3425 :: UInt
+  load 246 // deadline6_delete/3426 :: UInt
   <
   assert
   // ^ Claim: delete
-  // at ./index.rsh:42:10:application
-  // at ./index.rsh:118:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
+  // at reach standard library:57:5:application
+  // at ./index.rsh:42:10:application call to "check" (defined at: reach standard library:49:32:function exp)
+  // at ./index.rsh:117:19:application call to "stakePeriodValid" (defined at: ./index.rsh:34:228:function exp)
   global ZeroAddress
-  store 245 // v2326 :: Array(UInt, 4)
+  store 245 // v3467 :: Array(UInt, 4)
   txn Sender
-  load 255 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
-  load 254 // stakeToken/2265 :: Token
-  load 253 // v2275 :: UInt
-  load 252 // voteManager/2285 :: Contract
-  load 251 // deadline1_signupEnd/2287 :: UInt
-  load 250 // deadline2_voteStart/2288 :: UInt
-  load 249 // deadline3_voteEnd/2289 :: UInt
-  load 248 // deadline4_voteFinal/2290 :: UInt
-  load 247 // deadline5_rewardStart/2291 :: UInt
-  load 246 // deadline6_delete/2292 :: UInt
-  load 245 // v2326 :: Array(UInt, 4)
+  load 255 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  load 254 // stakeToken/3399 :: Token
+  load 253 // v3409 :: UInt
+  load 252 // voteManager/3419 :: Contract
+  load 251 // deadline1_signupEnd/3421 :: UInt
+  load 250 // deadline2_voteStart/3422 :: UInt
+  load 249 // deadline3_voteEnd/3423 :: UInt
+  load 248 // deadline4_voteFinal/3424 :: UInt
+  load 247 // deadline5_rewardStart/3425 :: UInt
+  load 246 // deadline6_delete/3426 :: UInt
+  load 245 // v3467 :: Array(UInt, 4)
   dup
   concat
-  load 245 // v2326 :: Array(UInt, 4)
+  load 245 // v3467 :: Array(UInt, 4)
   concat
-  load 245 // v2326 :: Array(UInt, 4)
+  load 245 // v3467 :: Array(UInt, 4)
   concat
   int 0
-  int 0
-  global LatestTimestamp
-  load 253 // v2275 :: UInt
+  load 253 // v3409 :: UInt
   int 0
   int 0
   int 0
   int 0
   global Round
-  global LatestTimestamp
   b loopBody1
   // publish0 }
 
 
   // { loopBody1
   loopBody1:
-  store 255 // thisConsensusSecs/2341 :: UInt
-  store 254 // thisConsensusTime/2340 :: UInt
-  store 253 // rewardedStakeT/2339 :: UInt
-  store 252 // rewardedStakeN/2338 :: UInt
-  store 251 // remainingStakeT/2337 :: UInt
-  store 250 // remainingStakeN/2336 :: UInt
-  store 249 // remainingReward/2335 :: UInt
-  store 248 // pnow/2334 :: UInt
-  store 247 // lnow/2333 :: UInt
-  store 246 // done/2332 :: Bool
-  store 245 // currentVote/2331 :: Array(Array(UInt, 4), 4)
-  store 244 // deadline6_delete/2292 :: UInt
-  store 243 // deadline5_rewardStart/2291 :: UInt
-  store 242 // deadline4_voteFinal/2290 :: UInt
-  store 241 // deadline3_voteEnd/2289 :: UInt
-  store 240 // deadline2_voteStart/2288 :: UInt
-  store 239 // deadline1_signupEnd/2287 :: UInt
-  store 238 // voteManager/2285 :: Contract
-  store 237 // v2275 :: UInt
-  store 236 // stakeToken/2265 :: Token
-  store 235 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
-  store 234 // Deployer/2263 :: Address
-  load 246 // done/2332 :: Bool
-  bz l46_ifF
+  store 255 // thisConsensusTime/3479 :: UInt
+  store 254 // rewardedStakeT/3478 :: UInt
+  store 253 // rewardedStakeN/3477 :: UInt
+  store 252 // remainingStakeT/3476 :: UInt
+  store 251 // remainingStakeN/3475 :: UInt
+  store 250 // remainingReward/3474 :: UInt
+  store 249 // done/3473 :: Bool
+  store 248 // currentVote/3472 :: Array(Array(UInt, 4), 4)
+  store 247 // deadline6_delete/3426 :: UInt
+  store 246 // deadline5_rewardStart/3425 :: UInt
+  store 245 // deadline4_voteFinal/3424 :: UInt
+  store 244 // deadline3_voteEnd/3423 :: UInt
+  store 243 // deadline2_voteStart/3422 :: UInt
+  store 242 // deadline1_signupEnd/3421 :: UInt
+  store 241 // voteManager/3419 :: Contract
+  store 240 // v3409 :: UInt
+  store 239 // stakeToken/3399 :: Token
+  store 238 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  store 237 // Deployer/3397 :: Address
+  load 249 // done/3473 :: Bool
+  bz l42_ifF
 
     // { makeTxn
     itxn_begin
@@ -1827,90 +1740,74 @@ assert
     global CurrentApplicationAddress
     itxn_field AssetReceiver
     // resource: R_Asset
-    load 236 // stakeToken/2265 :: Token
+    load 239 // stakeToken/3399 :: Token
     itxn_field XferAsset
     itxn_submit
     // makeTxn }
 
   // CompanionDeletePre
   b updateStateHalt
-  l46_ifF:
-  load 250 // remainingStakeN/2336 :: UInt
-  load 251 // remainingStakeT/2337 :: UInt
+  l42_ifF:
+  load 251 // remainingStakeN/3475 :: UInt
+  load 252 // remainingStakeT/3476 :: UInt
   +
-  store 233 // remainingStake/2413 :: UInt
-  load 252 // rewardedStakeN/2338 :: UInt
-  load 253 // rewardedStakeT/2339 :: UInt
+  store 236 // remainingStake/3538 :: UInt
+  load 253 // rewardedStakeN/3477 :: UInt
+  load 254 // rewardedStakeT/3478 :: UInt
   +
-  store 232 // rewardedStake/2414 :: UInt
-  load 243 // deadline5_rewardStart/2291 :: UInt
-  load 255 // thisConsensusSecs/2341 :: UInt
-  <
-  store 231 // rewardsStarted/2418 :: Bool
-  load 234 // Deployer/2263 :: Address
-  load 235 // stakePeriod/2264 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
+  store 235 // rewardedStake/3539 :: UInt
+  load 237 // Deployer/3397 :: Address
+  load 238 // stakePeriod/3398 :: Struct([['"period"', UInt], ['"consManager"', Contract], ['"consManagerAddr"', Address], ['"voteManager"', Contract], ['"voteManagerAddr"', Address], ['"measures"', UInt], ['"choicesPerMeasure"', Array(UInt, 4)], ['"deadline1_signupEnd"', UInt], ['"deadline2_voteStart"', UInt], ['"deadline3_voteEnd"', UInt], ['"deadline4_voteFinal"', UInt], ['"deadline5_rewardStart"', UInt], ['"deadline6_delete"', UInt], ['"totalReward"', UInt]])
   concat
-  load 236 // stakeToken/2265 :: Token
+  load 239 // stakeToken/3399 :: Token
   itob
   concat
-  load 237 // v2275 :: UInt
+  load 240 // v3409 :: UInt
   itob
   concat
-  load 238 // voteManager/2285 :: Contract
+  load 241 // voteManager/3419 :: Contract
   itob
   concat
-  load 239 // deadline1_signupEnd/2287 :: UInt
+  load 242 // deadline1_signupEnd/3421 :: UInt
   itob
   concat
-  load 240 // deadline2_voteStart/2288 :: UInt
+  load 243 // deadline2_voteStart/3422 :: UInt
   itob
   concat
-  load 241 // deadline3_voteEnd/2289 :: UInt
+  load 244 // deadline3_voteEnd/3423 :: UInt
   itob
   concat
-  load 242 // deadline4_voteFinal/2290 :: UInt
+  load 245 // deadline4_voteFinal/3424 :: UInt
   itob
   concat
-  load 243 // deadline5_rewardStart/2291 :: UInt
+  load 246 // deadline5_rewardStart/3425 :: UInt
   itob
   concat
-  load 244 // deadline6_delete/2292 :: UInt
+  load 247 // deadline6_delete/3426 :: UInt
   itob
   concat
-  load 245 // currentVote/2331 :: Array(Array(UInt, 4), 4)
+  load 248 // currentVote/3472 :: Array(Array(UInt, 4), 4)
   concat
-  byte base64(AA==)
-  concat
-  load 247 // lnow/2333 :: UInt
+  load 250 // remainingReward/3474 :: UInt
   itob
   concat
-  load 248 // pnow/2334 :: UInt
+  load 251 // remainingStakeN/3475 :: UInt
   itob
   concat
-  load 249 // remainingReward/2335 :: UInt
+  load 252 // remainingStakeT/3476 :: UInt
   itob
   concat
-  load 250 // remainingStakeN/2336 :: UInt
+  load 253 // rewardedStakeN/3477 :: UInt
   itob
   concat
-  load 251 // remainingStakeT/2337 :: UInt
+  load 254 // rewardedStakeT/3478 :: UInt
   itob
   concat
-  load 252 // rewardedStakeN/2338 :: UInt
+  load 236 // remainingStake/3538 :: UInt
   itob
   concat
-  load 253 // rewardedStakeT/2339 :: UInt
+  load 235 // rewardedStake/3539 :: UInt
   itob
-  concat
-  load 233 // remainingStake/2413 :: UInt
-  itob
-  concat
-  load 232 // rewardedStake/2414 :: UInt
-  itob
-  concat
-  load 231 // rewardsStarted/2418 :: Bool
-  itob
-  substring 7 8
   concat
   byte base64(AA==)
   dig 1
@@ -1927,7 +1824,7 @@ assert
   byte base64(Aw==)
   dig 1
   int 381
-  int 109
+  int 91
   extract3
   app_global_put
   pop
@@ -2006,25 +1903,41 @@ assert
 b apiReturn_noCheck
 alloc:
 int 0
+txn GlobalNumUint
+==
+assert
+int 5
+txn GlobalNumByteSlice
+==
+assert
+int 0
+txn LocalNumUint
+==
+assert
+int 1
+txn LocalNumByteSlice
+==
+assert
+int 0
 store 1 // GV_currentStep :: UInt
 int 0
 store 2 // GV_currentTime :: UInt
 b updateStateNoOp
-l13_LF_cMapLoad:
+l11_LF_cMapLoad:
 dup
 txn ApplicationID
 app_opted_in
-bnz l47_mapLoadDo
-l48_mapLoadDef:
+bnz l43_mapLoadDo
+l44_mapLoadDef:
 pop
 int 50
 bzero
 retsub
-l47_mapLoadDo:
+l43_mapLoadDo:
 byte base64(AA==)
 app_local_get
 retsub
-l38_LF_checkTxn_net:
+l35_LF_checkTxn_net:
 // resource: R_Txn
 load 0 // GV_txnCounter :: UInt
 dup
@@ -2044,7 +1957,7 @@ gtxns Amount
 ==
 assert
 retsub
-l39_LF_checkTxn_tok:
+l36_LF_checkTxn_tok:
 // resource: R_Txn
 load 0 // GV_txnCounter :: UInt
 dup

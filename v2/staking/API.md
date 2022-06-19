@@ -141,12 +141,6 @@ If they do this before they claim their rewards, then their stake and rewards ar
 The application relies on someone to call functions to transition it to the next state.
 It is assumed the Creator (i.e. Algorand Foundation) will call these, but anyone can.
 
-#### `Admin_nop()uint64`
-
-May be called anytime to record the time in the contract state.
-
-This function never needs to be called and is included for testing.
-
 #### `Admin_delete()(uint64,uint64)`
 
 Called after `deadline6_delete` to delete the application.

@@ -10,13 +10,6 @@
       }
     },
     {
-      "name": "Admin_nop",
-      "args": [],
-      "returns": {
-        "type": "uint64"
-      }
-    },
-    {
       "name": "Governor_stake",
       "args": [
         {

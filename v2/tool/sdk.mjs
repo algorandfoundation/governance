@@ -299,43 +299,15 @@ export const makeClient = (acc, ctcInfo) => {
     ...rawInfo,
     voteResult,
   };
-  const { Governor_stake, Governor_unstake, Governor_vote, Governor_unvote, Other_claimFor, Admin_delete, Admin_nop } = ctc.apis;
-
-  /* This is really dumb and just because Reach is doing local checking that
-   * the contract call will succeed. It would not be necessary if we called
-   * with the ABI directly. Furthermore, it has a double call because in our
-   * testing environment, nothing else is happening on the network, so we need
-   * to do two transactions because Timestamp refers to the timestamp of the
-   * LAST round.
-   */
-  const wrap = (f) => async (...args) => {
-    try {
-      return await f(...args);
-    } catch (e) {
-      const es = e.toString();
-      const m = es.match(/Assertion failed: [^ ]+: a /);
-      debug(`wrap`, m);
-      if ( m !== null ) {
-        debug(`wrap retry`);
-        const nt1 = await Admin_nop();
-        debug(`Admin_nop`, nt1.toString());
-        const nt2 = await Admin_nop();
-        debug(`Admin_nop`, nt2.toString());
-        return await f(...args);
-      } else {
-        throw e;
-      }
-    }
-  };
+  const { Governor_stake, Governor_unstake, Governor_vote, Governor_unvote, Other_claimFor, Admin_delete } = ctc.apis;
 
   return {
     Governor_stake,
-    Governor_unstake: wrap(Governor_unstake),
-    Governor_vote: wrap(Governor_vote),
-    Governor_unvote: wrap(Governor_unvote),
-    Other_claimFor: wrap(Other_claimFor),
-    Admin_delete: wrap(Admin_delete),
-    Admin_nop,
+    Governor_unstake,
+    Governor_vote,
+    Governor_unvote,
+    Other_claimFor,
+    Admin_delete,
     VoteManager_OptIn,
     VoteManager_ClearState,
     Info,
