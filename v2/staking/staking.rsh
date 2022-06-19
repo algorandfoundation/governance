@@ -200,7 +200,7 @@ export const main = Reach.App(() => {
       // stake.
       check(stake > 0, "positive stake");
       return [ [ stakeN, [ stakeT, stakeToken ]], (k) => {
-        checked(before(deadline1_signupEnd), "b signupEnd");
+        enforce(before(deadline1_signupEnd), "b signupEnd");
         AccM[gov] = { stakeN, stakeT, bene, voted: false };
         k(true);
         Notify.stake(gov, stakeN, stakeT, bene);
@@ -218,8 +218,8 @@ export const main = Reach.App(() => {
       const { stakeN, stakeT, stake, voted } = accGet(gov);
       check(! voted, "hasn't voted yet");
       return [ [ 0, [0, stakeToken] ], (k) => {
-        checked(after(deadline2_voteStart), "a voteStart");
-        checked(before(deadline3_voteEnd), "b voteEnd");
+        enforce(after(deadline2_voteStart), "a voteStart");
+        enforce(before(deadline3_voteEnd), "b voteEnd");
         accUpd(gov, (_) => ({ voted: true }));
         const voten = voteManager.Staking_vote.ALGO({
           addressToAccount: true,
@@ -240,8 +240,8 @@ export const main = Reach.App(() => {
       const { stakeN, stakeT, voted } = accGet(gov);
       check(voted, "has voted already");
       return [ [ 0, [0, stakeToken] ], (k) => {
-        checked(after(deadline2_voteStart), "a voteStart");
-        checked(before(deadline4_voteFinal), "b voteFinal");
+        enforce(after(deadline2_voteStart), "a voteStart");
+        enforce(before(deadline4_voteFinal), "b voteFinal");
         accUpd(gov, (_) => ({ voted: false }));
         const voten = voteManager.Staking_withdraw.ALGO({
           addressToAccount: true,
@@ -265,8 +265,8 @@ export const main = Reach.App(() => {
           const rewardsStarted = getRewardsStarted();
           const shouldReward = rewardsStarted && voted;
           const reward = (() => { if (shouldReward) { return muldiv(totalReward, stake, rewardedStake); } else { return 0; } })();
-          (hardTheorem ? assert : checked)(reward <= remainingReward, "reward is portion of reward");
-          checked(implies(voted, rewardsStarted), "a rewardStart");
+          (hardTheorem ? assert : enforce)(reward <= remainingReward, "reward is portion of reward");
+          enforce(implies(voted, rewardsStarted), "a rewardStart");
           delete AccM[gov];
           transfer([
             stakeN,
@@ -294,7 +294,7 @@ export const main = Reach.App(() => {
     .api_(P.Other_claimFor, (gov) => {
       const [ pay, doAfter ] = doUnstake(gov);
       return [ pay, (k) => {
-        checked(after(deadline5_rewardStart), "a rewardStart");
+        enforce(after(deadline5_rewardStart), "a rewardStart");
         return doAfter(k);
       }]
     })
@@ -302,7 +302,7 @@ export const main = Reach.App(() => {
       const who = this;
       void who;
       return [ [ 0, [0, stakeToken] ], (k) => {
-        checked(after(deadline6_delete), "a delete");
+        enforce(after(deadline6_delete), "a delete");
         const rN = remainingStakeN + remainingReward;
         const rT = remainingStakeT;
         transfer([ rN, [ rT, stakeToken ] ]).to(Deployer);
