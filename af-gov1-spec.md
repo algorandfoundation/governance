@@ -73,7 +73,12 @@ For every block, the decoder processes all the transactions in this block with S
 
 + For every pay transaction from GA to EA in this block with notes field of the format `af/gov1:j{"com":<n>}` if <n> is a 53-bit non-negative integer then it sends `Commitment(<n>)`. In more detail, the part enclosed in `{}` (including) must be valid JSON object literal that includes a key "com" with a number value. It may include other key/value pairs, they will be ignored in this spec.
 
-  *Modified Dec 2021*: Starting the 2nd period. governors will also be able to specify benificiary address, using the format `af/gov1:j{"com":nnn,"bnf":"aaa"}` where `aaa` is a valid Algorand address. This format specifies that governance rewards must be sent to the address `aaa` rather than to the governor's address. Since distribution of rewards is out-of-scope for this standard, this addition is ignored here.
+  Modified Dec 2021: Starting the 2nd period, governors will also be able to specify benificiary address, using the format `af/gov1:j{"com":nnn,"bnf":"aaa"}` where `aaa` is a valid Algorand address. This format specifies that governance rewards must be sent to the address `aaa` rather than to the governor's address. Since distribution of rewards is out-of-scope for this standard, this addition is ignored here.
+  
+  **Modified Sep 2022**: In the 5th period, Q4 2022, fovernors can also commit LP tokens from [an approved list by the foundation](https://drive.google.com/file/d/1ePtkmWgHBd_51QUTAOYp0s-bX3Z-GXDc/view?usp=sharing). To specify an LP-token commitment, add another field `assetid:commitment' to the notes field, where `assetid` is the Asset-ID of the relevant LP token and `commitment` is the amount of LP tokens committed (in the native LP-token unit, usually a micro-LP). Below are a few examples:
+  
+  - `af/gov1:j{"com":1000000,12345:1000000,67890:2000000}` - commit one ALGO, one LP-tokern with asset-ID 12345, and two LP-tokens with asset-ID 67890.
+  - `af/gov1:j{12345:1000000}` - commit one LP-tokern with asset-ID 1234 but no ALGOs.
 
 + For every pay transaction from GA to EA in this block with notes field of the format `af/gov1:j[idx,q1,q2,...]` it sends `Vote-cast`.
 
