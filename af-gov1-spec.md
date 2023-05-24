@@ -73,16 +73,26 @@ For every block, the decoder processes all the transactions in this block with S
 
 + For every pay transaction from GA to EA in this block with notes field of the format `af/gov1:j{"com":<n>}` if <n> is a 53-bit non-negative integer then it sends `Commitment(<n>)`. In more detail, the part enclosed in `{}` (including) must be valid JSON object literal that includes a key "com" with a number value. It may include other key/value pairs, they will be ignored in this spec.
 
-  Modified Dec 2021: Starting the 2nd period, governors will also be able to specify benificiary address, using the format `af/gov1:j{"com":nnn,"bnf":"aaa"}` where `aaa` is a valid Algorand address. This format specifies that governance rewards must be sent to the address `aaa` rather than to the governor's address. Since distribution of rewards is out-of-scope for this standard, this addition is ignored here.
+  **Modified Dec 2021**: Starting the 2nd period, governors will also be able to specify benificiary address, using the format `af/gov1:j{"com":nnn,"bnf":"aaa"}` where `aaa` is a valid Algorand address. This format specifies that governance rewards must be sent to the address `aaa` rather than to the governor's address. Since distribution of rewards is out-of-scope for this standard, this addition is ignored here.
   
   **Modified Sep 2022**: In the 5th period, Q4 2022, fovernors can also commit LP tokens from [an approved list by the foundation](https://drive.google.com/file/d/1ePtkmWgHBd_51QUTAOYp0s-bX3Z-GXDc/view?usp=sharing). To specify an LP-token commitment, add another field `"assetid":commitment` to the notes field, where `assetid` is the Asset-ID of the relevant LP token (in a string format) and `commitment` is the amount of LP tokens committed (in the native LP-token unit, usually a micro-LP). Below are a few examples:
   
   - `af/gov1:j{"com":1000000,"12345":1000000,"67890":2000000}` - commit one ALGO, one LP-tokern with asset-ID 12345, and two LP-tokens with asset-ID 67890.
   - `af/gov1:j{"12345":1000000}` - commit one LP-tokern with asset-ID 1234 but no ALGOs.
-
+  
+  **Modified May 2023**: Starting in the 7th period, Q2 2023, governors can specify also some xGov-related fields. Specifically, governors can sign up to be xGovs by designating as beneficiary the xGov escrow address (that changes from one governance period to the next). They can also designate an xGov-controller address that would participate on their behalf in xGov votes, via the optional parameter `"xGv":"aaa"`. Namely the Notes field has the form
+  ```
+  af/gov1:j{"com":nnn,"mmm1":nnn1,"mmm2":nnn2,"bnf":"XYZ","xGv":"ABC"}
+  ```
+  where:
+  - "com":nnn is the Algo commitment;
+  - "mmm":nnn is a commitment for LP-token with asset-ID mmm;
+  - "bnf":"XYZ" designates the address "XYZ" as the recipient of rewards ("XYZ" must equal the xGov escrow in order to sign up as an xGov);
+  - The optional "xGv":"ABC" designates address "ABC" as the xGov-controller of this xGov account.
+  
 + For every pay transaction from GA to EA in this block with notes field of the format `af/gov1:j[idx,q1,q2,...]` it sends `Vote-cast`.
 
-  (*Modified Dec 2021*) In more detail, the part enclosed in `[]` (including) must be a valid JSON array literal, whose length is one more than the number of measures in the voting session (so for example length=2 for the voting session in the 1st governance period that had only one measure). Denoting that array by A, A[0] must be a number literal, equal to the internal index of the voting session (which is 3 for the voting session in the 1st governance period and 4 for the voting session in the second governance period).
+  **Modified Dec 2021** In more detail, the part enclosed in `[]` (including) must be a valid JSON array literal, whose length is one more than the number of measures in the voting session (so for example length=2 for the voting session in the 1st governance period that had only one measure). Denoting that array by A, A[0] must be a number literal, equal to the internal index of the voting session (which is 3 for the voting session in the 1st governance period and 4 for the voting session in the second governance period).
   Each A[i] for i>0 correspond to a vote for one of the measure in the voting session, and can be one of the following formats:
  
   - a string literal equal to one of the options for the i'th measure (so A[1] must be either "a" or "b" for the voting session in the first governance period).
